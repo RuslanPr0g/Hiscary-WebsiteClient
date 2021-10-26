@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+.story {
+    margin: 10px auto;
+    background-color: blueviolet;
+    padding: 10px;
+    list-style: none;
+    max-width: 40%;
+}
+
+.story_title {
+    margin: 10px;
+    background-color: burlywood;
+}
