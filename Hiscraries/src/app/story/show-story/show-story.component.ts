@@ -18,7 +18,11 @@ export class ShowStoryComponent implements OnInit {
 
   refreshStoryList() {
     this.service.getStoryList().subscribe(data => {
-      this.StoryList = data;
+      let firstImage = data.reverse()[0].imagePreview;
+      this.StoryList = data.map(s => {
+        s.imagePreview = firstImage;
+        return s;
+      });
     })
   }
 }
