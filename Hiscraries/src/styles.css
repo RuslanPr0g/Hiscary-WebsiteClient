@@ -1,12 +1,4 @@
-.story {
-    margin: 10px auto;
-    background-color: blueviolet;
-    padding: 10px;
-    list-style: none;
-    max-width: 40%;
-}
-
-.story_title {
-    margin: 10px;
-    background-color: burlywood;
+body {
+    color: #fff;
+    background-color: #10101C;
 }

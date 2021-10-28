@@ -1,0 +1,16 @@
+.headerbar {
+    display: flex;
+    justify-content: center;
+    padding: 1%;
+}
+
+.searchbar {
+    border-radius: 30px;
+    border-style: none;
+    outline: none;
+    padding: 10px 20px 10px 20px;
+    min-width: 30%;
+
+    color: #fff;
+    background-color: #2D2D44;
+}

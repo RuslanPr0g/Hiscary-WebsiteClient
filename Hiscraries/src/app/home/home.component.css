@@ -1,0 +1,23 @@
+.home-section {
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.genrelist {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5%;
+}
+
+.genre {
+    max-width: 300px;
+}
+
+.genre_preview {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.genre_preview > img {
+    width: 100%;
+}

@@ -1,28 +1,20 @@
-<ul class="list">
+<ul class="story-list">
     <li class="story" *ngFor="let storyItem of StoryList">
-        <div class="story_title">
-            {{ storyItem.id }}
+        <div class="story_header">
+            <div class="author">
+                <div class="author_preview"></div>
+                <div class="author_name">
+                    {{ storyItem.authorName }}
+                </div>
+            </div>
         </div>
-        <div class="story_title">
-            {{ storyItem.title }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.description }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.authorName }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.ageLimit }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.imagePreview }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.datePublished }}
-        </div>
-        <div class="story_title">
-            {{ storyItem.dateWritten }}
+        <div class="story_footer">
+            <h3 class="story_title">
+                {{ storyItem.title }}
+            </h3>
+            <p class="story_description">
+                {{ storyItem.description }}
+            </p>
         </div>
     </li>
 </ul>

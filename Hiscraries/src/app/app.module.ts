@@ -11,13 +11,15 @@ import { TestsharedService } from './testshared.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StoryComponent,
     ShowStoryComponent,
-    AddEditStoryComponent
+    AddEditStoryComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule, 
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: StoryComponent }
+      { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent }
     ])
   ],
   providers: [TestsharedService],

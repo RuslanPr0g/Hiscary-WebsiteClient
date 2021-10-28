@@ -1,0 +1,36 @@
+.story-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.story {
+    margin: 10px 0;
+    background-color: blueviolet;
+    padding: 10px;
+    list-style: none;
+    min-width: 550px;
+}
+
+.story_header {
+    height: 250px;
+}
+
+.story_title {
+    font-size: 25px;
+    min-width: 300px;
+    overflow-wrap: break-word;
+}
+
+.story_description {
+    font-size: 16px;    
+    overflow-wrap: break-word;
+}
+
+.author {
+    background-color: #000;
+    opacity: 20%;
+    width: 150px;
+    padding: 7px;
+    overflow-wrap: break-word;
+}
