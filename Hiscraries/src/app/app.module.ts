@@ -12,6 +12,7 @@ import { TestsharedService } from './testshared.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +20,20 @@ import { HomeComponent } from './home/home.component';
     StoryComponent,
     ShowStoryComponent,
     AddEditStoryComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'home', component: HomeComponent }
+      { path: 'home', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
     ])
   ],
   providers: [TestsharedService],
