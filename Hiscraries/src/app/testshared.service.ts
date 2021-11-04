@@ -49,9 +49,13 @@ export class TestsharedService {
   register(val: any) {
     return this.http.post(this.APIUrl + "/user/register", {
       username: val.username,
-      email: val.username + "@gmail.com",
-      birthDate: Date.now,
+      email: val.email,
+      birthDate: val.dob,
       password: val.password
     });
+  }
+
+  getPagesForStory(val: any) {
+    return this.http.get<any>(this.APIUrl + "/story/page/" + val.id);
   }
 }

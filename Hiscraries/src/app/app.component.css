@@ -1,8 +1,8 @@
 .headerbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 1%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
 }
 
 .searchbar {
@@ -11,18 +11,12 @@
     outline: none;
     padding: 10px 20px 10px 20px;
     min-width: 30%;
-
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-
+]
     color: #fff;
     background-color: #2D2D44;
 }
 
 .header-login-link {
-    position: absolute;
-    right: 5%;
 }
 
 .login-link {
@@ -35,7 +29,4 @@
     background-color: rgba(0, 0, 10, 0.2);
     color: white;
     font-size: 1.5em;
-
-    position: absolute;
-    left: 5%;
 }

@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ReadStoryComponent } from './story/read-story/read-story.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoginComponent } from './login/login.component';
     ShowStoryComponent,
     AddEditStoryComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ReadStoryComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { LoginComponent } from './login/login.component';
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'story/read/:id', component: ReadStoryComponent }
     ])
   ],
   providers: [TestsharedService],

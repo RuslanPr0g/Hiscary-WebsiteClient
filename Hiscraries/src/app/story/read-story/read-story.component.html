@@ -1,0 +1,28 @@
+<div class="loading" *ngIf="IsLoading">
+    <div class="lds-grid"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>
+
+<div class="errorpage" *ngIf="IsError && !IsLoading">
+    Either there is no such story you're looking for or story has been deleted.
+</div>
+
+<div class="readstory" *ngIf="!IsError && !IsLoading">
+    <div class="book">
+        <div class="book_content">
+            {{ Pages[CurrentPage] && Pages[CurrentPage].content }}
+        </div>
+        <div class="book_navigation">
+            <div class="book_pagecount">
+                {{ CurrentPage + 1 }} / {{ Pages.length }}
+            </div>
+            <div class="book_buttons">
+                <button class="btn btn-info" (click)="PrevPage()">
+                    Prev
+                </button>
+                <button class="btn btn-info" (click)="NextPage()">
+                    Next
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

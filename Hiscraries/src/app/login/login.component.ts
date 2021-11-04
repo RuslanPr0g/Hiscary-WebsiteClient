@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
 
     this.formregister = this.formBuilder.group({
       username: '',
-      password: ''
+      password: '',
+      email: undefined,
+      dob: undefined
     })
    }
 
