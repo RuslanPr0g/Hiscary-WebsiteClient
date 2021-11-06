@@ -14,6 +14,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ReadStoryComponent } from './story/read-story/read-story.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+import { LogoutComponent } from './logout/logout.component';
+import { HeaderbarComponent } from './headerbar/headerbar.component';
+
+export function tokenGetter() {
+  return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
+}
 
 @NgModule({
   declarations: [
@@ -23,7 +32,10 @@ import { ReadStoryComponent } from './story/read-story/read-story.component';
     AddEditStoryComponent,
     HomeComponent,
     LoginComponent,
-    ReadStoryComponent
+    ReadStoryComponent,
+    SearchResultsComponent,
+    LogoutComponent,
+    HeaderbarComponent
   ],
   imports: [
     BrowserModule,
@@ -32,12 +44,19 @@ import { ReadStoryComponent } from './story/read-story/read-story.component';
     ReactiveFormsModule,
     FormsModule,
     ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter
+      }
+    }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'story/read/:id', component: ReadStoryComponent }
-    ])
+      { path: 'logout', component: LogoutComponent },
+      { path: 'story/read/:id', component: ReadStoryComponent },
+      { path: 'story/search/:query', component: SearchResultsComponent },
+    ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [TestsharedService],
   bootstrap: [AppComponent]

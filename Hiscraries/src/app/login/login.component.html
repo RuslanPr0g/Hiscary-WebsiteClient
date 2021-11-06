@@ -1,9 +1,15 @@
+<app-headerbar></app-headerbar>
+
+<div class="error" *ngIf="errorMessage.length > 0">
+    <p>{{ errorMessage }}</p>
+</div>
+
 <div class="signin">
     <div class="login" *ngIf="isLoginState">
         <form [formGroup]="formlogin" autocomplete='off' class='form' (submit)="logIn()">
             <div class='control'>
                 <h1>
-                    Simple Sign In Ever
+                    Log in
                 </h1>
             </div>
             <div class='control block-cube block-input'>
@@ -67,7 +73,7 @@
         <form [formGroup]="formregister" autocomplete='off' class='form' (submit)="signUp()">
             <div class='control'>
                 <h1>
-                    Simple Sign In Ever
+                    Sign up
                 </h1>
             </div>
             <div class='control block-cube block-input'>

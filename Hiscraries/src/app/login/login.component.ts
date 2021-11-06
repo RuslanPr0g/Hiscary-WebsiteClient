@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { fakeAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TestsharedService } from '../testshared.service';
 
 @Component({
@@ -11,8 +13,9 @@ export class LoginComponent implements OnInit {
   formlogin: FormGroup;
   formregister: FormGroup;
   isLoginState: boolean;
+  errorMessage: string = '';
   
-  constructor(private formBuilder: FormBuilder, private service: TestsharedService) {
+  constructor(private formBuilder: FormBuilder, private service: TestsharedService, private router: Router) {
     this.isLoginState = true;
 
     this.formlogin = this.formBuilder.group({
@@ -26,10 +29,17 @@ export class LoginComponent implements OnInit {
       email: undefined,
       dob: undefined
     })
+
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
    }
 
   ngOnInit(): void {
-    
+    if (this.service.isAuthenticated())
+    {
+      this.router.navigateByUrl('');
+    }
   }
 
   changeState(state: boolean): void {
@@ -37,20 +47,24 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(): void {
-    console.log("Login: ", this.formlogin.getRawValue());
-    
     this.service.login(this.formlogin.getRawValue())
     .subscribe(res => {
-      console.log(res)
+      this.router.navigateByUrl('');
+    },
+    error => {
+      console.error("Login Error", error)
+      this.errorMessage = error.error;
     });
   }
 
   signUp(): void {
-    console.log("Signup: ", this.formregister.getRawValue());
-    
     this.service.register(this.formregister.getRawValue())
     .subscribe(res => {
-      console.log(res)
+      this.router.navigateByUrl('');
+    },
+    error => {
+      console.error("Register Error", error)
+      this.errorMessage = error.error;
     });
   }
 }

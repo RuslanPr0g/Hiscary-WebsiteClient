@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  ACCESS_TOKEN_KEY: "hiscary_access_token_key",
+  REFRESH_TOKEN_KEY: "hiscary_refresh_access_token_key"
 };
 
 /*

@@ -15,6 +15,14 @@ h1 {
   font-size: 23px;
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+
+  color: red;
+  font-size: 1.5em;
+}
+
 .signin {
   display: flex;
   justify-content: space-around;
@@ -38,7 +46,8 @@ h1 {
   letter-spacing: 0.05em;
   font-size: 16px;
 }
-.form .control input:hover, .form .control input:focus {
+.form .control input:hover,
+.form .control input:focus {
   outline: none;
   border: 0;
 }
@@ -115,7 +124,9 @@ h1 {
   position: relative;
   z-index: 2;
 }
-.block-cube.block-input input:focus ~ .bg-right .bg-inner, .block-cube.block-input input:focus ~ .bg-top .bg-inner, .block-cube.block-input input:focus ~ .bg-inner .bg-inner {
+.block-cube.block-input input:focus ~ .bg-right .bg-inner,
+.block-cube.block-input input:focus ~ .bg-top .bg-inner,
+.block-cube.block-input input:focus ~ .bg-inner .bg-inner {
   top: 100%;
   background: rgba(255, 255, 255, 0.5);
 }
@@ -131,12 +142,14 @@ h1 {
 }
 .block-cube.block-input:focus .bg-top,
 .block-cube.block-input:focus .bg-right,
-.block-cube.block-input:focus .bg, .block-cube.block-input:hover .bg-top,
+.block-cube.block-input:focus .bg,
+.block-cube.block-input:hover .bg-top,
 .block-cube.block-input:hover .bg-right,
 .block-cube.block-input:hover .bg {
   background: rgba(255, 255, 255, 0.8);
 }
-.block-cube.block-cube-hover:focus .bg .bg-inner, .block-cube.block-cube-hover:hover .bg .bg-inner {
+.block-cube.block-cube-hover:focus .bg .bg-inner,
+.block-cube.block-cube-hover:hover .bg .bg-inner {
   top: 100%;
 }
 
