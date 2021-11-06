@@ -61,7 +61,8 @@ export class ProfileComponent implements OnInit {
       newPassword: this.formupdatepassword.getRawValue().newPassword
     }).subscribe(
       data => {
-        this.router.navigateByUrl('logout');
+        this.service.logOut();
+        this.router.navigateByUrl('login');
       },
       error => {
         console.log(error)
