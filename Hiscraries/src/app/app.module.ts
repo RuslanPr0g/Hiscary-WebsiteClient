@@ -19,6 +19,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { LogoutComponent } from './logout/logout.component';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
+import { ProfileComponent } from './profile/profile.component';
+import { InfoStoryComponent } from './story/info-story/info-story.component';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -35,7 +37,9 @@ export function tokenGetter() {
     ReadStoryComponent,
     SearchResultsComponent,
     LogoutComponent,
-    HeaderbarComponent
+    HeaderbarComponent,
+    ProfileComponent,
+    InfoStoryComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +58,8 @@ export function tokenGetter() {
       { path: 'home', component: HomeComponent },
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'story/info/:id', component: InfoStoryComponent },
       { path: 'story/read/:id', component: ReadStoryComponent },
       { path: 'story/search/:query', component: SearchResultsComponent },
     ], { onSameUrlNavigation: 'reload' })

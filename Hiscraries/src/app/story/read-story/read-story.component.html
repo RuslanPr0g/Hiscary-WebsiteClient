@@ -10,8 +10,7 @@
 
 <div class="readstory" *ngIf="!IsError && !IsLoading">
     <div class="book">
-        <div class="book_content">
-            {{ Pages[CurrentPage] && Pages[CurrentPage].content }}
+        <div class="book_content" [innerHTML]="Pages[CurrentPage] && Pages[CurrentPage].content">
         </div>
         <div class="book_navigation">
             <div class="book_pagecount">

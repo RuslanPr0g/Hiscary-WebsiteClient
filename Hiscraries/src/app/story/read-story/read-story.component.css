@@ -17,6 +17,8 @@
 .book_content {
     text-align: justify;
     min-height: 60vh;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .book_navigation {

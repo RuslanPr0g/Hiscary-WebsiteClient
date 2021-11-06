@@ -1,0 +1,16 @@
+a {
+  background-color: rgba(0, 0, 10, 0.2);
+  color: white;
+  font-size: 1.5em;
+}
+
+.errorpage {
+  padding: 5%;
+  color: red;
+  font-size: 2em;
+}
+
+.storyinfo {
+  padding: 5%;
+  font-size: 1.3em;
+}
