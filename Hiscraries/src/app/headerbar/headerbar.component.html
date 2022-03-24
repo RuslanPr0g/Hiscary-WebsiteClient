@@ -10,6 +10,7 @@
          *ngIf="isLoggedIn && !isPublisher">Become Publisher</button><br>
 
         <a href="/profile" class="header-link header-profile-link" *ngIf="isLoggedIn">Profile</a><br>
+        <a href="/history" class="header-link header-profile-link" *ngIf="isLoggedIn">History</a><br>
         <a href="/logout" class="header-link header-logout-link" *ngIf="isLoggedIn">Log Out</a>
 
         <a href="/login" class="header-link header-login-link" *ngIf="!isLoggedIn">Log In</a>

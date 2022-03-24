@@ -37,6 +37,6 @@ export class SearchResultsComponent implements OnInit {
 
     setTimeout(() => {
       this.IsLoading = false;
-    }, 2000);
+    }, 1000);
   }
 }

@@ -25,6 +25,11 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  getHistory() {
+    return this.http.get<any>(this.APIUrl + "/story/history",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   getStoryList(): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/story/shuffle",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });

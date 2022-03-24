@@ -9,7 +9,6 @@ import { TestsharedService } from '../testshared.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
   constructor(private formBuilder: FormBuilder, private service: TestsharedService, private router: Router) {
     this.formuserdata = this.formBuilder.group({
       email: '',
@@ -30,12 +29,15 @@ export class ProfileComponent implements OnInit {
   IsLoading: boolean = true;
   errorMessage: string = '';
 
+  StoryList: any = []
+
   ngOnInit(): void {
     if (this.service.isAuthenticated() === false) {
       this.router.navigateByUrl('login');
     }
 
     this.getUserInfo();
+    this.refreshStoryList();
   }
 
   getUserInfo(): any {
@@ -46,12 +48,12 @@ export class ProfileComponent implements OnInit {
       if (isError) {
         setTimeout(() => {
           this.IsError = true;
-        }, 2000);
+        }, 1000);
       }
 
       setTimeout(() => {
         this.IsLoading = false;
-      }, 2000);
+      }, 1000);
     })
   }
 
@@ -68,6 +70,12 @@ export class ProfileComponent implements OnInit {
         console.log(error)
         this.errorMessage = error.error;
       });
+  }
+
+  refreshStoryList() {
+    this.service.getStoryList().subscribe(data => {
+      this.StoryList = data.filter(item => item.publisher.id == this.User.id).reverse();
+    })
   }
 
   updateUserData(): void {

@@ -1,5 +1,3 @@
-<app-headerbar></app-headerbar>
-
 <div class="loading" *ngIf="IsLoading">
     <div class="lds-grid">
         <div></div>
@@ -18,25 +16,29 @@
     Either there is no such story you're looking for or story has been deleted.
 </div>
 
-<section class="storyinfo" *ngIf="!IsError && !IsLoading">
-    <div class="storydata"><strong>Story:</strong></div>
-    <div class="storydata">Title: {{ Story.title }}</div>
-    <div class="storydata">Description: {{ Story.description }}</div>
-    <div class="storydata">Age Limit: {{ Story.ageLimit }}</div>
-    <div class="storydata">Author Name: {{ Story.authorName }}</div>
-    <div class="storydata">Genre: {{ Story.genre.name }}</div>
-    <div class="storydata">Written: {{ Story.dateWritten }}</div>
-    <div class="storydata">Published: {{ Story.datePublished }}</div>
-    <div class="storydata">Average Score: {{ Story.averageScore }}</div>
-    <div class="storydata">Read Counter: {{ Story.readCount }}</div>
-    <div class="storydata">Comments: {{ Story.commentCount }}</div>
-    <br>
-    <div class="storydata"><strong>Publisher:</strong></div>
-    <div class="storydata">Has Total Stories: {{ Story.publisher.totalStories }}</div>
-    <div class="storydata">Has Total Reads: {{ Story.publisher.totalReads }}</div>
-    <div class="storydata">Has Average Score: {{ Story.publisher.averageScore }}</div>
-    <br>
-    <a href="/story/read/{{Story.id}}" class="btn btn-info">
-        Read story NOW!
-    </a>
-</section>
+<div class="loaded" *ngIf="!IsLoading">
+    <app-headerbar></app-headerbar>
+
+    <section class="storyinfo" *ngIf="!IsError">
+        <div class="storydata"><strong>Story:</strong></div>
+        <div class="storydata">Title: {{ Story.title }}</div>
+        <div class="storydata">Description: {{ Story.description }}</div>
+        <div class="storydata">Age Limit: {{ Story.ageLimit }}</div>
+        <div class="storydata">Author Name: {{ Story.authorName }}</div>
+        <div class="storydata">Genre: {{ Story.genre.name }}</div>
+        <div class="storydata">Written: {{ Story.dateWritten }}</div>
+        <div class="storydata">Published: {{ Story.datePublished }}</div>
+        <div class="storydata">Average Score: {{ Story.averageScore }}</div>
+        <div class="storydata">Read Counter: {{ Story.readCount }}</div>
+        <div class="storydata">Comments: {{ Story.commentCount }}</div>
+        <br>
+        <div class="storydata"><strong>Publisher:</strong></div>
+        <div class="storydata">Has Total Stories: {{ Story.publisher.totalStories }}</div>
+        <div class="storydata">Has Total Reads: {{ Story.publisher.totalReads }}</div>
+        <div class="storydata">Has Average Score: {{ Story.publisher.averageScore }}</div>
+        <br>
+        <a href="/story/read/{{Story.id}}" class="btn btn-info">
+            Read story NOW!
+        </a>
+    </section>
+</div>

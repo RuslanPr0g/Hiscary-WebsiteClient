@@ -24,6 +24,7 @@ import { InfoStoryComponent } from './story/info-story/info-story.component';
 import { PublishComponent } from './publish/publish.component';
 import { ModifyStoryComponent } from './modify-story/modify-story.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HistoryComponent } from './history/history.component';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -44,7 +45,8 @@ export function tokenGetter() {
     ProfileComponent,
     InfoStoryComponent,
     PublishComponent,
-    ModifyStoryComponent
+    ModifyStoryComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ export function tokenGetter() {
       { path: 'logout', component: LogoutComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'publish', component: PublishComponent },
+      { path: 'history', component: HistoryComponent },
       { path: 'modifystory/:id', component: ModifyStoryComponent },
       { path: 'story/info/:id', component: InfoStoryComponent },
       { path: 'story/read/:id', component: ReadStoryComponent },

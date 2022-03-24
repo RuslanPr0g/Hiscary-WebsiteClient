@@ -26,13 +26,6 @@
             </a>
         </li>
     </ul>
-
-</div>
-
-<div class="emptyerror" *ngIf="StoryList.length === 0 && !IsLoading">
-    <p>
-        No stories found for <span class="query">{{ SearchQuery }}</span>
-    </p>
 </div>
 
 <div class="loading" *ngIf="IsLoading">

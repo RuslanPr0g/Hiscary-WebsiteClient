@@ -28,12 +28,12 @@ export class InfoStoryComponent implements OnInit {
       if (isError) {
         setTimeout(() => {
           this.IsError = true;
-        }, 2000);
+        }, 1000);
       }
 
       setTimeout(() => {
         this.IsLoading = false;
-      }, 2000);
+      }, 1000);
     })
   }
 }

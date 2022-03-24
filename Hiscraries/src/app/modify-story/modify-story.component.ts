@@ -103,7 +103,7 @@ export class ModifyStoryComponent implements OnInit {
       if (isError) {
         setTimeout(() => {
           this.IsError = true;
-        }, 2000);
+        }, 1000);
       }
       else {
         this.htmlContent = this.pages[this.CurrentPage];
@@ -111,7 +111,7 @@ export class ModifyStoryComponent implements OnInit {
 
       setTimeout(() => {
         this.IsLoading = false;
-      }, 2000);
+      }, 1000);
     })
   }
 
@@ -133,7 +133,7 @@ export class ModifyStoryComponent implements OnInit {
       if (isError) {
         setTimeout(() => {
           this.IsError = true;
-        }, 2000);
+        }, 1000);
       }
 
       setTimeout(() => {
@@ -142,7 +142,7 @@ export class ModifyStoryComponent implements OnInit {
         }
 
         this.IsLoading = false;
-      }, 2000);
+      }, 1000);
     })
   }
 
