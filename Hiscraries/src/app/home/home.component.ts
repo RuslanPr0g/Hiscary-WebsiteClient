@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
   setGenres(): void {
     this.service.getGenres().subscribe(data => {
       this.GenreList = data.reverse();
-      console.log(this.GenreList)
     })
   }
 }

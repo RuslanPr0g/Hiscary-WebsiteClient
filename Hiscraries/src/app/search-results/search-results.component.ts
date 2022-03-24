@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestsharedService } from '../testshared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -9,20 +10,28 @@ import { TestsharedService } from '../testshared.service';
 })
 export class SearchResultsComponent implements OnInit {
 
-  constructor(private service: TestsharedService, private route: ActivatedRoute) { }
+  constructor(private service: TestsharedService, private route: ActivatedRoute, private router: Router) { }
 
   StoryList: any = []
-  SearchQuery: string = "";
+  SearchQuery: string | null = "";
   IsLoading: boolean = true;
 
   ngOnInit(): void {
-    let query = this.route.snapshot.params['query'];
-    this.SearchQuery = query;
-    this.searchByQuery(query);
+    let search = this.route.snapshot.queryParamMap.get('s');
+    let genre = this.route.snapshot.queryParamMap.get('g');
+
+    this.SearchQuery = search;
+
+    if (!search && !genre)
+    {
+      this.router.navigateByUrl('');
+    }
+
+    this.searchByQuery(search, genre);
   }
 
-  searchByQuery(query: string): any {
-    this.service.search({ query }).subscribe(data => {
+  searchByQuery(search: string | null, genre: string | null): any {
+    this.service.search({ search, genre }).subscribe(data => {
       this.StoryList = data;
     });
 

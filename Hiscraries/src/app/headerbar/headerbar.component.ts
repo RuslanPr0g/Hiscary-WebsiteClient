@@ -8,7 +8,7 @@ import { TestsharedService } from '../testshared.service';
   styleUrls: ['./headerbar.component.css']
 })
 export class HeaderbarComponent implements OnInit {
-  searchBarValue = '';
+  searchBarValue: string | null = '';
   isLoggedIn: boolean = false;
   CurrentUser: any;
   isPublisher: any;
@@ -21,7 +21,7 @@ export class HeaderbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.service.isAuthenticated();
-    this.searchBarValue = this.route.snapshot.params['query'];
+    this.searchBarValue = this.route.snapshot.queryParamMap.get('query');
 
     if (this.service.isAuthenticated() == false)
     {
@@ -35,7 +35,7 @@ export class HeaderbarComponent implements OnInit {
     let searchRequest = event.target.value.trim();
 
     if (searchRequest != '')
-      this.router.navigateByUrl('story/search/' + searchRequest);
+      this.router.navigateByUrl('story/search/all?s=' + searchRequest);
   }
 
   becomePub(): void {

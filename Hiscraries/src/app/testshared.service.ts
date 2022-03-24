@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router, UrlSerializer } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class TestsharedService {
   readonly APIUrl = "https://localhost:5001/api/v1";
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, 
+    private router: Router, private serializer: UrlSerializer) {
   }
 
   //
@@ -49,7 +51,9 @@ export class TestsharedService {
   }
 
   search(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story?search=" + val.query,
+    const tree = this.router.createUrlTree(["story"], { queryParams: { search: val.search, genre: val.genre } });
+    let query = this.serializer.serialize(tree);
+    return this.http.get<any>(this.APIUrl + query,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
