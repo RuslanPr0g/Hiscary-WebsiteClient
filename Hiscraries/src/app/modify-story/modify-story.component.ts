@@ -16,10 +16,11 @@ export class ModifyStoryComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private service: TestsharedService,
     private route: ActivatedRoute, private router: Router) {
     this.modifystory = this.formBuilder.group({
+      storyId: '',
       title: '',
       description: '',
       authorname: '',
-      genreid: '',
+      genreId: '',
       agelimit: '',
       datewritten: new Date()
     })
@@ -78,6 +79,7 @@ export class ModifyStoryComponent implements OnInit {
 
     let id = this.route.snapshot.params['id'];
     this.StoryId = id;
+
     this.setUser();
     this.getStory(id);
     this.getStoryPages(id);
@@ -147,7 +149,17 @@ export class ModifyStoryComponent implements OnInit {
   }
 
   modifyStoryInfo(): void {
-    // logic to update the story info
+    let storyMod = this.modifystory.getRawValue();
+    storyMod["storyId"] = this.StoryId;
+    this.service.updateStoryInfo(storyMod).subscribe(
+      data => {
+        this.router.navigateByUrl('story/info/' + this.StoryId);
+      },
+      error => {
+        console.log(error)
+        this.IsError = true;
+        this.errorMessage = error.error;
+      });
   }
 
   nextPage(): void {

@@ -12,10 +12,6 @@
     </div>
 </div>
 
-<div class="errorpage" *ngIf="IsError && !IsLoading">
-    Some error occured while modifying the story!
-</div>
-
 <div class="loaded" *ngIf="!IsLoading">
     <app-headerbar></app-headerbar>
 
@@ -27,6 +23,7 @@
                         Modify a story
                     </h1>
                 </div>
+
                 <div class='control block-cube block-input'>
                     <input formControlName="title" name='title' placeholder='Title' type='title' required>
                     <div class='bg-top'>

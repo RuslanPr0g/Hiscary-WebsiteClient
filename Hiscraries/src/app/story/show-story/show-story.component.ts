@@ -20,9 +20,8 @@ export class ShowStoryComponent implements OnInit {
       this.router.navigateByUrl('login');
     }
 
-    this.refreshStoryList();
-
     this.setUser();
+    this.refreshStoryList();
   }
 
   refreshStoryList() {
