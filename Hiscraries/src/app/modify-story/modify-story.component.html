@@ -14,40 +14,21 @@
     </div>
 </div>
 
-<div class="error" *ngIf="errorMessage.length > 0">
-    <p>{{ errorMessage }}</p>
-</div>
-
 <div class="errorpage" *ngIf="IsError && !IsLoading">
-    Something went wrong... Try to <a href="/login">log in</a> again, please.
+    Some error occured while modifying the story!
 </div>
 
-<section class="userdatasection" *ngIf="!IsError && !IsLoading">
-    <div class="userdata">Username: {{ User.username }}</div>
-    <div class="userdata">Email: {{ User.email }}</div>
-    <div class="userdata">Age: {{ User.age }}</div>
-    <div class="userdata">Account Created: {{ User.accountCreated }}</div>
-    <div class="userdata">Total Reads (People read you): {{ User.totalReads }}</div>
-    <div class="userdata">Total Stories: {{ User.totalStories }}</div>
-    <div class="userdata">Average Score: {{ User.averageScore }}</div>
-    <br>
 
-    <div class="userdata">
-        <form [formGroup]="formuserdata" autocomplete='off' class='form' (submit)="updateUserData()">
-            <div class='control block-cube block-input'>
-                <input formControlName="email" name='email' placeholder='Email' type='text' required>
-                <div class='bg-top'>
-                    <div class='bg-inner'></div>
-                </div>
-                <div class='bg-right'>
-                    <div class='bg-inner'></div>
-                </div>
-                <div class='bg'>
-                    <div class='bg-inner'></div>
-                </div>
+<div class="container">
+    <section class="publish-story-section">
+        <form [formGroup]="modifystory" autocomplete='off' class='form' (submit)="modifyStoryInfo()">
+            <div class='control'>
+                <h1>
+                    Modify a story
+                </h1>
             </div>
             <div class='control block-cube block-input'>
-                <input formControlName="dob" name='dob' value="2000-01-01" type='date' required>
+                <input formControlName="title" name='title' placeholder='Title' type='title' required>
                 <div class='bg-top'>
                     <div class='bg-inner'></div>
                 </div>
@@ -59,27 +40,9 @@
                 </div>
             </div>
 
-            <button class='btn block-cube block-cube-hover' type='submit'>
-                <div class='bg-top'>
-                    <div class='bg-inner'></div>
-                </div>
-                <div class='bg-right'>
-                    <div class='bg-inner'></div>
-                </div>
-                <div class='bg'>
-                    <div class='bg-inner'></div>
-                </div>
-                <div class='text'>
-                    Update Profile Data
-                </div>
-            </button>
-        </form>
-    </div>
-    <br>
-    <!-- <div class="userdata">
-        <form [formGroup]="formupdatepassword" autocomplete='off' class='form' (submit)="updatePassword()">
             <div class='control block-cube block-input'>
-                <input formControlName="oldPassword" name='oldPassword' placeholder='Current Password' type='text' required>
+                <input formControlName="description" name='description' placeholder='Description' type='description'
+                    required>
                 <div class='bg-top'>
                     <div class='bg-inner'></div>
                 </div>
@@ -90,8 +53,9 @@
                     <div class='bg-inner'></div>
                 </div>
             </div>
+
             <div class='control block-cube block-input'>
-                <input formControlName="newPassword" name='newPassword' placeholder='New Password' type='text' required>
+                <input formControlName="authorname" name='authorname' placeholder='Author' type='authorname' required>
                 <div class='bg-top'>
                     <div class='bg-inner'></div>
                 </div>
@@ -102,6 +66,33 @@
                     <div class='bg-inner'></div>
                 </div>
             </div>
+
+            <div class='control block-cube block-input'>
+                <input formControlName="genreid" name='genreid' placeholder='Genre' type='genreid' required>
+                <div class='bg-top'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg-right'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg'>
+                    <div class='bg-inner'></div>
+                </div>
+            </div>
+
+            <div class='control block-cube block-input'>
+                <input formControlName="agelimit" name='agelimit' placeholder='Age Limit' type='agelimit' required>
+                <div class='bg-top'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg-right'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg'>
+                    <div class='bg-inner'></div>
+                </div>
+            </div>
+
 
             <button class='btn block-cube block-cube-hover' type='submit'>
                 <div class='bg-top'>
@@ -114,9 +105,48 @@
                     <div class='bg-inner'></div>
                 </div>
                 <div class='text'>
-                    Update Password
+                    Apply
+                </div>
+            </button>
+            <br>
+            <button class='btn block-cube block-cube-red block-cube-hover' type='button' (click)="cancel()">
+                <div class='bg-top'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg-right'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='text'>
+                    Cancel
                 </div>
             </button>
         </form>
-    </div> -->
-</section>
+    </section>
+    <section class="publish-pages-section">
+        <h1>
+            Modify pages for the story
+        </h1>
+
+        <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+        <div class="current-page">
+            Current page: {{CurrentPage + 1}}/{{pages.length}}
+        </div>
+        <div class="controls">
+            <button (click)="prevPage()" class="btn btn-info">
+                Prev page
+            </button>
+            <button (click)="removePage()" class="btn btn-warning">
+                Remove page
+            </button>
+            <button (click)="nextPage()" class="btn btn-info">
+                Next page
+            </button>
+            <button (click)="publishPages()" class="btn btn-success">
+                Publish changes
+            </button>
+        </div>
+    </section>
+</div>

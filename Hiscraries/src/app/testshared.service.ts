@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class TestsharedService {
-  readonly APIUrl = "https://localhost:5001/api";
+  readonly APIUrl = "https://localhost:5001/api/v1";
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
   }
@@ -18,42 +18,39 @@ export class TestsharedService {
   // *** STORY ***
   //
 
-  // { headers: {"Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY)} }
   getStoryList(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl + "/story");
+    return this.http.get<any>(this.APIUrl + "/story",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
-  // "publisherId": 0,
-  // "title": "string",
-  // "description": "string",
-  // "authorName": "string",
-  // "genreId": 0,
-  // "ageLimit": 0,
-  // "dateWritten": "2021-10-26T19:15:21.407Z"
   addStory(val: any) {
-    return this.http.post(this.APIUrl + "/story", val);
+    return this.http.post(this.APIUrl + "/story", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
-  // "storyId": 0,
-  // "content": "string"
   addStoryPage(val: any) {
-    return this.http.post(this.APIUrl + "/story/page", val);
+    return this.http.post(this.APIUrl + "/story/page", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   getPagesForStory(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story/page/" + val.id);
+    return this.http.get<any>(this.APIUrl + "/story/page/" + val.id,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   search(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story?search=" + val.query);
+    return this.http.get<any>(this.APIUrl + "/story?search=" + val.query,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   getStoryById(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story?id=" + val.id);
+    return this.http.get<any>(this.APIUrl + "/story?id=" + val.id,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   getStoryByGenre(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story?id=" + val.genre);
+    return this.http.get<any>(this.APIUrl + "/story?id=" + val.genre,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   //
@@ -65,8 +62,6 @@ export class TestsharedService {
       { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
-  //   "username": "string",
-  //   "password": "string"
   login(val: any) {
     return this.http.post(this.APIUrl + "/user/login", val)
       .pipe(
@@ -77,12 +72,13 @@ export class TestsharedService {
       );
   }
 
-  // "email": "string",
-  // "birthDate": "2021-11-06T22:46:34.244Z",
-  // "previousPassword": "string",
-  // "newPassword": "string"
   updateUsersData(val: any) {
     return this.http.patch(this.APIUrl + "/user/update-profile", val,
+      { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  updateStoryPages(val: any) {
+    return this.http.post(this.APIUrl + "/story/pages", val,
       { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
@@ -102,10 +98,6 @@ export class TestsharedService {
     return true;
   }
 
-  //   "username": "string",
-  //   "email": "string",
-  //   "birthDate": "2021-11-02T16:19:14.548Z",
-  //   "password": "string"
   register(val: any) {
     return this.http.post(this.APIUrl + "/user/register", {
       username: val.username,

@@ -21,6 +21,9 @@ import { LogoutComponent } from './logout/logout.component';
 import { HeaderbarComponent } from './headerbar/headerbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { InfoStoryComponent } from './story/info-story/info-story.component';
+import { PublishComponent } from './publish/publish.component';
+import { ModifyStoryComponent } from './modify-story/modify-story.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -39,7 +42,9 @@ export function tokenGetter() {
     LogoutComponent,
     HeaderbarComponent,
     ProfileComponent,
-    InfoStoryComponent
+    InfoStoryComponent,
+    PublishComponent,
+    ModifyStoryComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +53,7 @@ export function tokenGetter() {
     ReactiveFormsModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularEditorModule,
     JwtModule.forRoot({
       config: {
         tokenGetter
@@ -59,6 +65,8 @@ export function tokenGetter() {
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'publish', component: PublishComponent },
+      { path: 'modifystory/:id', component: ModifyStoryComponent },
       { path: 'story/info/:id', component: InfoStoryComponent },
       { path: 'story/read/:id', component: ReadStoryComponent },
       { path: 'story/search/:query', component: SearchResultsComponent },

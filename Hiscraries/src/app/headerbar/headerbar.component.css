@@ -25,6 +25,10 @@
   font-size: 1.5em;
 }
 
+.header-publish-link {
+  color: yellow;
+}
+
 .home-link {
   background-color: rgba(0, 0, 10, 0.2);
   color: white;
