@@ -29,7 +29,6 @@ export class HistoryComponent implements OnInit {
   refreshStoryList() {
     this.service.getHistory().subscribe(data => {
       this.StoryList = data.reverse();
-
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);

@@ -3,7 +3,7 @@
 
     <ul class="story-list" *ngIf="StoryList.length > 0 && !IsLoading">
         <li class="story-list_item" *ngFor="let storyItem of StoryList">
-            <a href="/story/info/{{storyItem.id}}" class="story">
+            <a href="/story/info/{{storyItem.storyId}}" class="story">
                 <div class="story_header">
                     <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview"
                         class="story_header_background">
@@ -14,6 +14,9 @@
                             {{ storyItem.authorName }}
                         </div>
                     </div>
+                </div>
+                <div class="meter red nostripes">
+                    <span style="width: {{storyItem.percentage * 100}}%"></span>
                 </div>
                 <div class="story_footer">
                     <h3 class="story_title">
