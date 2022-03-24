@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TestsharedService } from 'src/app/testshared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: TestsharedService, private router: Router) { }
+
+  GenreList: any = [];
 
   ngOnInit(): void {
+    this.setGenres();
   }
 
+  setGenres(): void {
+    this.service.getGenres().subscribe(data => {
+      this.GenreList = data.reverse();
+      console.log(this.GenreList)
+    })
+  }
 }

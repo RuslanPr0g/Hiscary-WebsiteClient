@@ -4,7 +4,11 @@
         (keyup.enter)="redirectToSearchPage($event)" [ngModel]="searchBarValue">
 
     <span>
-        <a href="/publish" class="header-link header-publish-link" *ngIf="isLoggedIn">Publish</a><br>
+        <a href="/publish" class="header-link header-publish-link" *ngIf="isPublisher">Publish</a>
+
+        <button (click)="becomePub()" class="header-link header-publish-link"
+         *ngIf="isLoggedIn && !isPublisher">Become Publisher</button><br>
+
         <a href="/profile" class="header-link header-profile-link" *ngIf="isLoggedIn">Profile</a><br>
         <a href="/logout" class="header-link header-logout-link" *ngIf="isLoggedIn">Log Out</a>
 

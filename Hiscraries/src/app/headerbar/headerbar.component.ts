@@ -10,6 +10,8 @@ import { TestsharedService } from '../testshared.service';
 export class HeaderbarComponent implements OnInit {
   searchBarValue = '';
   isLoggedIn: boolean = false;
+  CurrentUser: any;
+  isPublisher: any;
 
   constructor(private router: Router, private service: TestsharedService, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
@@ -20,6 +22,13 @@ export class HeaderbarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn = this.service.isAuthenticated();
     this.searchBarValue = this.route.snapshot.params['query'];
+
+    if (this.service.isAuthenticated() == false)
+    {
+      this.router.navigateByUrl('login');
+    }
+
+    this.setUser();
   }
 
   redirectToSearchPage(event: any): void {
@@ -27,5 +36,25 @@ export class HeaderbarComponent implements OnInit {
 
     if (searchRequest != '')
       this.router.navigateByUrl('story/search/' + searchRequest);
+  }
+
+  becomePub(): void {
+    this.service.becomePublisher()
+      .subscribe(res => {
+      },
+      error => {
+      });
+      
+    this.router.navigateByUrl('publish');
+  }
+
+  setUser(): void {
+    this.service.getUserInfo()
+    .subscribe(res => {
+      this.CurrentUser = res;
+      this.isPublisher = this.CurrentUser.role == "publisher";
+    },
+    error => {
+    });
   }
 }

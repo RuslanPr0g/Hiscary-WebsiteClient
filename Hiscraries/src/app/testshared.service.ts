@@ -18,13 +18,23 @@ export class TestsharedService {
   // *** STORY ***
   //
 
+  getGenres() {
+    return this.http.get<any>(this.APIUrl + "/story/genres",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   getStoryList(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl + "/story",
+    return this.http.get<any>(this.APIUrl + "/story/shuffle",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
   addStory(val: any) {
     return this.http.post(this.APIUrl + "/story", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  readStoryHistory(val: any) {
+    return this.http.post(this.APIUrl + "/story/readstory", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
@@ -48,14 +58,14 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
-  getStoryByGenre(val: any) {
-    return this.http.get<any>(this.APIUrl + "/story?id=" + val.genre,
-    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
-  }
-
   //
   // *** USER ***
   //
+
+  becomePublisher() {
+    return this.http.get<any>(this.APIUrl + "/user/becomepublisher",
+      { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
 
   getUserInfo() {
     return this.http.get<any>(this.APIUrl + "/user",

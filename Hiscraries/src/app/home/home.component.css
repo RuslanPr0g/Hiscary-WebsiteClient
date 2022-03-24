@@ -7,6 +7,8 @@
     display: flex;
     justify-content: space-around;
     margin-bottom: 5%;
+    overflow-x:scroll;
+    max-height: 150px;
 }
 
 .genre {
@@ -21,3 +23,28 @@
 .genre_preview > img {
     width: 100%;
 }
+
+
+
+
+
+
+a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .genre,
+  .genre-list_item {
+    margin: 10px 10px;
+    padding: 10px;
+    list-style: none;
+    border-right: 2px solid white;
+  }
+  

@@ -62,12 +62,14 @@ export class ModifyStoryComponent implements OnInit {
   Story: any = {};
   errorMessage: string = "";
   IsError: boolean = false;
-  IsLoading: boolean = false;
+  IsLoading: boolean = true;
 
   modifystory: FormGroup;
   htmlContent: string = "";
   pages: Array<string> = [""];
   CurrentPage: number = 0;
+
+  CurrentUser: any;
 
   ngOnInit(): void {
     if (this.service.isAuthenticated() == false) {
@@ -76,8 +78,18 @@ export class ModifyStoryComponent implements OnInit {
 
     let id = this.route.snapshot.params['id'];
     this.StoryId = id;
+    this.setUser();
     this.getStory(id);
     this.getStoryPages(id);
+  }
+
+  setUser(): void {
+    this.service.getUserInfo()
+      .subscribe(res => {
+        this.CurrentUser = res;
+      },
+        error => {
+        });
   }
 
   getStoryPages(id: number): void {
@@ -125,6 +137,10 @@ export class ModifyStoryComponent implements OnInit {
       }
 
       setTimeout(() => {
+        if (this.CurrentUser.id != this.Story.publisher.id) {
+          this.router.navigateByUrl('');
+        }
+
         this.IsLoading = false;
       }, 2000);
     })

@@ -5,32 +5,21 @@
     <h1 class="text-center">By genre</h1>
 </section>
 <section class="genrelist">
-    <div class="genre">
-        <div class="genre_preview">
-            <img src="https://i.ytimg.com/vi/NGleyyNc5-k/maxresdefault.jpg" alt="scary_building">
-        </div>
-        <div class="genre_title">
-            Some title of the genre
-        </div>
-    </div>
-
-    <div class="genre">
-        <div class="genre_preview">
-            <img src="https://i.ytimg.com/vi/NGleyyNc5-k/maxresdefault.jpg" alt="scary_building">
-        </div>
-        <div class="genre_title">
-            Some title of the genre
-        </div>
-    </div>
-
-    <div class="genre">
-        <div class="genre_preview">
-            <img src="https://i.ytimg.com/vi/NGleyyNc5-k/maxresdefault.jpg" alt="scary_building">
-        </div>
-        <div class="genre_title">
-            Some title of the genre
-        </div>
-    </div>
+    <ul class="genre-list">
+        <li class="genre-list_item" *ngFor="let genreItem of GenreList">
+            <a href="/search?g={{genreItem.name}}" class="genre">
+                <!-- <div class="genre_header">
+                    <img src="data:image/png;base64,{{ genreItem.imagePreview }}" alt="genre preview"
+                        class="genre_header_background">
+                </div> -->
+                <div class="genre_footer">
+                    <h3 class="genre_name">
+                        {{ genreItem.name }}
+                    </h3>
+                </div>
+            </a>
+        </li>
+    </ul>
 </section>
 
 <!-- Best to read goes here -->
