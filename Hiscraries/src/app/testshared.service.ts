@@ -110,6 +110,22 @@ export class TestsharedService {
   //
   // *** USER ***
   //
+  
+
+  getReviews() {
+    return this.http.get<any>(this.APIUrl + "/user/review/",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  publishReview(val: any) {
+    return this.http.post(this.APIUrl + "/user/review", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  removeReview(val: any) {
+    return this.http.post(this.APIUrl + "/user/review/force", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
 
   becomePublisher() {
     return this.http.get<any>(this.APIUrl + "/user/becomepublisher",
