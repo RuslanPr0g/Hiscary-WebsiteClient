@@ -93,6 +93,7 @@ export function tokenGetter() {
       { path: 'history', component: HistoryComponent },
       { path: 'bookmarks', component: BookmarksComponent },
       { path: 'modifystory/:id', component: ModifyStoryComponent },
+      { path: 'publisher/:id', component: PublisherInfoComponent },
       { path: 'story/info/:id', component: InfoStoryComponent },
       { path: 'story/read/:id', component: ReadStoryComponent },
       { path: 'story/search/:query', component: SearchResultsComponent },

@@ -1,1 +1,66 @@
-<p>publisher-info works!</p>
+<div class="loading" *ngIf="IsLoading">
+    <div class="lds-grid">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div class="error" *ngIf="errorMessage.length > 0">
+    <p>{{ errorMessage }}</p>
+</div>
+
+<div class="errorpage" *ngIf="IsError && !IsLoading">
+    Something went wrong... Try to <a href="/login">log in</a> again, please.
+</div>
+
+
+<div class="loaded" *ngIf="!IsLoading">
+    <app-headerbar></app-headerbar>
+
+    <section class="userdatasection" *ngIf="!IsError">
+        <div class="userdata">Username: {{ User.username }}</div>
+        <div class="userdata">Email: {{ User.email }}</div>
+        <div class="userdata">Age: {{ User.age }}</div>
+        <div class="userdata">Account Created: {{ User.accountCreated }}</div>
+        <div class="userdata">Total Reads: {{ User.totalReads }}</div>
+        <div class="userdata">Total Stories: {{ User.totalStories }}</div>
+        <div class="userdata">Average Score: {{ User.averageScore | number: '1.0-2' }}</div>
+        <br>
+    </section>
+
+    <section class="home-section">
+        <h1 class="text-center">Publisher's stories</h1>
+    </section>
+    <ul class="story-list">
+        <li class="story-list_item" *ngFor="let storyItem of StoryList">
+            <a href="/story/info/{{storyItem.id}}" class="story">
+
+                <div class="story_header">
+                    <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview" class="story_header_background">
+                    <div class="author">
+                        <div class="author_preview">
+                        </div>
+                        <div class="author_name">
+                            {{ storyItem.authorName }}
+                        </div>
+                    </div>
+                </div>
+                <div class="story_footer">
+                    <h3 class="story_title">
+                        {{ storyItem.title }}
+                    </h3>
+                    <p class="story_description">
+                        {{ storyItem.description }}
+                    </p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>

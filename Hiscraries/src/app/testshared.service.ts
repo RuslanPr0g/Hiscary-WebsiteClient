@@ -111,6 +111,13 @@ export class TestsharedService {
       { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  getUserInfoUsername(username: string) {
+    const tree = this.router.createUrlTree(["user"], { queryParams: { username } });
+    let query = this.serializer.serialize(tree);
+    return this.http.get<any>(this.APIUrl + query,
+      { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   login(val: any) {
     return this.http.post(this.APIUrl + "/user/login", val)
       .pipe(
