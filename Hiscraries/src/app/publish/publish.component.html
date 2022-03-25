@@ -52,6 +52,28 @@
             </div>
 
             <div class='control block-cube block-input'>
+                <div class='bg-top'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg-right'>
+                    <div class='bg-inner'></div>
+                </div>
+                <div class='bg'>
+                    <div class='bg-inner bg-efefef'></div>
+                </div>
+                <div class="genre-block">
+                    <span class="genre-title">Genre</span>
+                    <mat-form-field appearance="fill">
+                        <mat-select [(ngModel)]="selectedValue" name="genre" [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let genre of genres" [value]="genre.id">
+                                {{genre.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- <div class='control block-cube block-input'>
                 <input formControlName="genreid" name='genreid' placeholder='Genre' type='genreid' required>
                 <div class='bg-top'>
                     <div class='bg-inner'></div>
@@ -62,7 +84,7 @@
                 <div class='bg'>
                     <div class='bg-inner'></div>
                 </div>
-            </div>
+            </div> -->
 
             <div class='control block-cube block-input'>
                 <input formControlName="agelimit" name='agelimit' placeholder='Age Limit' type='agelimit' required>
@@ -77,7 +99,7 @@
                 </div>
             </div>
 
-            
+
             <button class='btn block-cube block-cube-hover' type='submit'>
                 <div class='bg-top'>
                     <div class='bg-inner'></div>

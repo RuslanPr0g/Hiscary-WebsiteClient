@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import * as _ from "lodash"
+import { Genre } from '../publish/Genre';
 
 @Component({
   selector: 'app-modify-story',
@@ -73,6 +74,11 @@ export class ModifyStoryComponent implements OnInit {
 
   CurrentUser: any;
 
+  selectedValue: number = 1;
+
+  genres: Genre[] = [];
+  GenreList: any = [];
+
   fileName = '';
 
   ngOnInit(): void {
@@ -86,6 +92,17 @@ export class ModifyStoryComponent implements OnInit {
     this.setUser();
     this.getStory(id);
     this.getStoryPages(id);
+    this.setGenres();
+  }
+
+  setGenres(): void {
+    this.service.getGenres().subscribe(data => {
+      this.GenreList = data.reverse();
+
+      this.GenreList.forEach((genre: any) => {
+        this.genres.push({ id: genre.id, name: genre.name });
+      });
+    })
   }
 
   setUser(): void {
@@ -133,6 +150,8 @@ export class ModifyStoryComponent implements OnInit {
         datewritten: this.Story.dateWritten
       })
 
+      this.selectedValue = this.Story.genre.id;
+
       let isError = this.Story == null || this.Story == undefined ? true : false;
 
       if (isError) {
@@ -155,6 +174,7 @@ export class ModifyStoryComponent implements OnInit {
     let storyMod = this.modifystory.getRawValue();
     storyMod["storyId"] = this.StoryId;
     storyMod["imagePreview"] = this.cardImageBase64;
+    storyMod["genreid"] = this.selectedValue;
     this.service.updateStoryInfo(storyMod).subscribe(
       data => {
         this.router.navigateByUrl('story/info/' + this.StoryId);

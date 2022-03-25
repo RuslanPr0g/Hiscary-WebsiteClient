@@ -27,6 +27,9 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HistoryComponent } from './history/history.component';
 import { BookmarksComponent } from './bookmarks/bookmarks.component';
 
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
 }
@@ -58,6 +61,8 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     AngularEditorModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter

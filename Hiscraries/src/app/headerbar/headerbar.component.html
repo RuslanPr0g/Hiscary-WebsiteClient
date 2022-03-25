@@ -1,19 +1,26 @@
 <header class="headerbar mt-3">
     <a href="/" class="home-link">Home</a>
-    <input id="searchBar" type="text" class="searchbar" placeholder="Search"
-        (keyup.enter)="redirectToSearchPage($event)" [ngModel]="searchBarValue">
+    <input id="searchBar" type="text" class="searchbar" placeholder="Search" (keyup.enter)="redirectToSearchPage($event)" [ngModel]="searchBarValue">
 
-    <span class="high-index">
-        <a href="/publish" class="header-link header-publish-link" *ngIf="isPublisher">Publish</a>
+    <nav id="navbar" class="navigation" role="navigation">
+        <input id="toggle1" type="checkbox" />
+        <label class="hamburger1" for="toggle1">
+          <div class="top"></div>
+          <div class="meat"></div>
+          <div class="bottom"></div>
+        </label>
 
-        <button (click)="becomePub()" class="header-link header-publish-link"
-         *ngIf="isLoggedIn && !isPublisher">Become Publisher</button><br>
+        <nav class="menu1">
+            <a href="/publish" class="header-link header-publish-link link1" *ngIf="isPublisher">Publish</a>
 
-        <a href="/profile" class="header-link header-profile-link" *ngIf="isLoggedIn">Profile</a><br>
-        <a href="/history" class="header-link header-profile-link" *ngIf="isLoggedIn">History</a><br>
-        <a href="/bookmarks" class="header-link header-profile-link" *ngIf="isLoggedIn">Bookmarks</a><br>
-        <a href="/logout" class="header-link header-logout-link" *ngIf="isLoggedIn">Log Out</a>
+            <button (click)="becomePub()" class="header-link header-publish-link link1" *ngIf="isLoggedIn && !isPublisher">Become Publisher</button>
 
-        <a href="/login" class="header-link header-login-link" *ngIf="!isLoggedIn">Log In</a>
-    </span>
+            <a href="/profile" class="header-link header-profile-link link1" *ngIf="isLoggedIn">Profile</a>
+            <a href="/history" class="header-link header-profile-link link1" *ngIf="isLoggedIn">History</a>
+            <a href="/bookmarks" class="header-link header-profile-link link1" *ngIf="isLoggedIn">Bookmarks</a>
+            <a href="/logout" class="header-link header-logout-link link1" *ngIf="isLoggedIn">Log Out</a>
+
+            <a href="/login" class="header-link header-login-link" *ngIf="!isLoggedIn">Log In</a>
+        </nav>
+    </nav>
 </header>
