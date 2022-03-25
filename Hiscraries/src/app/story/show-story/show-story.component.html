@@ -3,8 +3,7 @@
         <a href="/story/info/{{storyItem.id}}" class="story">
 
             <div class="story_header">
-                <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview"
-                    class="story_header_background">
+                <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview" class="story_header_background">
                 <div class="author">
                     <div class="author_preview">
                     </div>
@@ -22,11 +21,11 @@
                 </p>
             </div>
         </a>
-        <a href="/modifystory/{{storyItem.id}}" class="edit-story btn btn-info" *ngIf="CurrentUser.id == storyItem.publisher.id">
-            Edit
+        <a class="edit-story" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="CurrentUser.id == storyItem.publisher.id">
+            <mat-icon>open_in_new</mat-icon>
         </a>
-        <button class="edit-story btn btn-info" (click)="bookmark(storyItem.id)">
-            Bookmark
+        <button mat-icon-button color="warn" class="edit-story" (click)="bookmark(storyItem.id)">
+            <mat-icon>favorite</mat-icon>
         </button>
     </li>
 </ul>

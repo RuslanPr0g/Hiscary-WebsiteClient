@@ -31,7 +31,7 @@
         <div class="userdata">Account Created: {{ User.accountCreated }}</div>
         <div class="userdata">Total Reads (People read you): {{ User.totalReads }}</div>
         <div class="userdata">Total Stories: {{ User.totalStories }}</div>
-        <div class="userdata">Average Score: {{ User.averageScore }}</div>
+        <div class="userdata">Average Score: {{ User.averageScore | number: '1.0-2' }}</div>
         <br>
 
         <div class="userdata">
@@ -131,8 +131,7 @@
             <a href="/story/info/{{storyItem.id}}" class="story">
 
                 <div class="story_header">
-                    <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview"
-                        class="story_header_background">
+                    <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview" class="story_header_background">
                     <div class="author">
                         <div class="author_preview">
                         </div>
@@ -150,9 +149,8 @@
                     </p>
                 </div>
             </a>
-            <a href="/modifystory/{{storyItem.id}}" class="edit-story btn btn-info"
-                *ngIf="User.id == storyItem.publisher.id">
-                Edit
+            <a class="edit-stor" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="User.id == storyItem.publisher.id">
+                <mat-icon>open_in_new</mat-icon>
             </a>
         </li>
     </ul>

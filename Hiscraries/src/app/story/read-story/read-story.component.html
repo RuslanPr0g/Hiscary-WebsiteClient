@@ -28,10 +28,10 @@
                     {{ CurrentPage + 1 }} / {{ Pages.length }}
                 </div>
                 <div class="book_buttons">
-                    <button class="btn btn-info" (click)="PrevPage()">
+                    <button mat-raised-button color="warn" (click)="PrevPage()">
                         Prev
                     </button>
-                    <button class="btn btn-info" (click)="NextPage()">
+                    <button mat-raised-button color="primary" (click)="NextPage()">
                         Next
                     </button>
                 </div>

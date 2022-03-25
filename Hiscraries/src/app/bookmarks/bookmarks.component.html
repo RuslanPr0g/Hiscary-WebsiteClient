@@ -8,8 +8,7 @@
         <a href="/story/info/{{storyItem.id}}" class="story">
 
             <div class="story_header">
-                <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview"
-                    class="story_header_background">
+                <img src="data:image/png;base64,{{ storyItem.imagePreview }}" alt="story preview" class="story_header_background">
                 <div class="author">
                     <div class="author_preview">
                     </div>
@@ -27,8 +26,8 @@
                 </p>
             </div>
         </a>
-        <button class="edit-story btn btn-info" (click)="bookmark(storyItem.id)">
-            Remove Bookmark
+        <button mat-icon-button color="primary" class="edit-story" (click)="bookmark(storyItem.id)">
+            <mat-icon>favorite</mat-icon>
         </button>
     </li>
 </ul>

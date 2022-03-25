@@ -1,5 +1,8 @@
-<header class="headerbar mt-3">
-    <a href="/" class="home-link">Home</a>
+<header class="headerbar">
+    <a href="/" mat-fab color="primary" aria-label="Example icon button with a home icon">
+        <mat-icon>home</mat-icon>
+    </a>
+
     <input id="searchBar" type="text" class="searchbar" placeholder="Search" (keyup.enter)="redirectToSearchPage($event)" [ngModel]="searchBarValue">
 
     <nav id="navbar" class="navigation" role="navigation">

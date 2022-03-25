@@ -17,28 +17,89 @@
 </div>
 
 <div class="loaded" *ngIf="!IsLoading">
+    <img src="data:image/png;base64,{{ Story.imagePreview }}" alt="story preview" class="story_preview">
     <app-headerbar></app-headerbar>
 
-    <section class="storyinfo" *ngIf="!IsError">
-        <div class="storydata"><strong>Story:</strong></div>
-        <div class="storydata">Title: {{ Story.title }}</div>
-        <div class="storydata">Description: {{ Story.description }}</div>
-        <div class="storydata">Age Limit: {{ Story.ageLimit }}</div>
-        <div class="storydata">Author Name: {{ Story.authorName }}</div>
-        <div class="storydata">Genre: {{ Story.genre.name }}</div>
-        <div class="storydata">Written: {{ Story.dateWritten }}</div>
-        <div class="storydata">Published: {{ Story.datePublished }}</div>
-        <div class="storydata">Average Score: {{ Story.averageScore }}</div>
-        <div class="storydata">Read Counter: {{ Story.readCount }}</div>
-        <div class="storydata">Comments: {{ Story.commentCount }}</div>
-        <br>
-        <div class="storydata"><strong>Publisher:</strong></div>
-        <div class="storydata">Has Total Stories: {{ Story.publisher.totalStories }}</div>
-        <div class="storydata">Has Total Reads: {{ Story.publisher.totalReads }}</div>
-        <div class="storydata">Has Average Score: {{ Story.publisher.averageScore }}</div>
-        <br>
-        <a href="/story/read/{{Story.id}}" class="btn btn-info">
-            Read story NOW!
-        </a>
-    </section>
+    <div class="two-screens">
+        <section class="storyinfo" *ngIf="!IsError">
+            <div class="storydata"><strong>Story:</strong></div>
+            <div class="storydata">Title: {{ Story.title }}</div>
+            <div class="storydata">Description: {{ Story.description }}</div>
+            <div class="storydata">Age Limit: {{ Story.ageLimit }}</div>
+            <div class="storydata">Author Name: {{ Story.authorName }}</div>
+            <div class="storydata">Genre: {{ Story.genre.name }}</div>
+            <div class="storydata">Written: {{ Story.dateWritten | date: 'MMM dd, yyyy' }}
+
+            </div>
+            <div class="storydata">Published: {{ Story.datePublished | date: 'MMM dd, yyyy' }}
+
+            </div>
+            <div class="storydata">Average Score: {{ Story.averageScore }}</div>
+            <div class="storydata">Read Counter: {{ Story.readCount }}</div>
+            <div class="storydata">Comments: {{ Story.commentCount }}</div>
+            <br>
+            <div class="storydata"><strong>Publisher:</strong></div>
+            <div class="storydata">Has Total Stories: {{ Story.publisher.totalStories }}</div>
+            <div class="storydata">Has Total Reads: {{ Story.publisher.totalReads }}</div>
+            <div class="storydata">Has Average Score: {{ Story.publisher.averageScore | number: '1.0-2' }}</div>
+            <a href="/publisher/{{Story.publisher.id}}">View profile</a>
+            <br>
+            <br>
+            <br>
+            <br>
+        </section>
+        <section class="storyinfo">
+            <a href="/story/read/{{Story.id}}" class="btn btn-info big-btn">
+                Read story NOW!
+            </a>
+        </section>
+    </div>
+    <div class="comments">
+        <section class="write-comment">
+            <form class="example-form">
+                <mat-form-field class="example-full-width" appearance="fill" [style.width.%]=50>
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput placeholder="Ex. It makes me feel..." [(ngModel)]='CurrentComment' [ngModelOptions]="{standalone: true}"></textarea>
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="addcomment" (click)="writeComment()">
+                    Publish
+                </button>
+            </form>
+        </section>
+        <section class="comments-section">
+            <ul class="comment-list" *ngIf="CommentList.length > 0 && !IsLoading">
+                <li class="comment-list_item" *ngFor="let commentItem of CommentList">
+                    <div class="comment">
+                        <div class="comment_header">
+                            <div class="author">
+                                <div class="author_preview">
+                                </div>
+                                <p class="author_name">
+                                    {{ commentItem.username }}
+                                </p>
+                                <p class="comment_at">
+                                    {{ commentItem.commentedAt | date: 'MMM dd, yyyy' }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="comment_footer">
+                            <mat-expansion-panel hideToggle>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-description>
+                                        {{ commentItem.content | slice:0:15 }}...
+                                    </mat-panel-description>
+                                </mat-expansion-panel-header>
+                                {{ commentItem.content }}
+                            </mat-expansion-panel>
+                            <div class="edit-comment" *ngIf="commentItem.userId == User.id">
+                                <button mat-icon-button color="warn" (click)="removeComment(commentItem.id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
 </div>

@@ -30,6 +30,15 @@ import { BookmarksComponent } from './bookmarks/bookmarks.component';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatInputModule } from '@angular/material/input';
+
+import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar'; 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
+
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
 }
@@ -51,7 +60,8 @@ export function tokenGetter() {
     PublishComponent,
     ModifyStoryComponent,
     HistoryComponent,
-    BookmarksComponent
+    BookmarksComponent,
+    PublisherInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +69,14 @@ export function tokenGetter() {
     FormsModule, 
     ReactiveFormsModule,
     FormsModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatInputModule,
     ReactiveFormsModule,
     AngularEditorModule,
+    MatIconModule,
     MatSelectModule,
+    MatProgressBarModule,
     BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {

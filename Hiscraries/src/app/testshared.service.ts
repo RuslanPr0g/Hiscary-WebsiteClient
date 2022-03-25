@@ -55,6 +55,16 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  writeComment(val: any) {
+    return this.http.post(this.APIUrl + "/story/comment", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  removeComment(val: any) {
+    return this.http.post(this.APIUrl + "/story/comment/force", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   updateStoryInfo(val: any) {
     return this.http.patch(this.APIUrl + "/story/", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
@@ -62,6 +72,11 @@ export class TestsharedService {
 
   getPagesForStory(val: any) {
     return this.http.get<any>(this.APIUrl + "/story/page/" + val.id,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  getComments() {
+    return this.http.get<any>(this.APIUrl + "/story/comment",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
