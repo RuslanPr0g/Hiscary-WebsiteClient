@@ -55,6 +55,16 @@
         </section>
     </div>
     <div class="comments">
+        <section class="scoring">
+            <button mat-icon-button color="accent" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i" (click)="onClick(i+1)" [matTooltip]="ratingId" matTooltipPosition="above">
+                <mat-icon>
+                  {{showIcon(i)}}
+                </mat-icon>
+              </button>
+            <mat-error *ngIf="starCount == null || starCount == 0">
+                Star count is <strong>required</strong> and cannot be zero
+            </mat-error>
+        </section>
         <section class="write-comment">
             <form class="example-form">
                 <mat-form-field class="example-full-width" appearance="fill" [style.width.%]=50>
@@ -73,6 +83,13 @@
                         <div class="comment_header">
                             <div class="author">
                                 <div class="author_preview">
+                                    <section class="scoring">
+                                        <div mat-icon-button color="accent" *ngFor="let in of counter(commentItem.score);let i = index" [id]="'star_'+i" matTooltipPosition="above">
+                                            <mat-icon>
+                                                {{showIcon100(i)}}
+                                            </mat-icon>
+                                        </div>
+                                    </section>
                                 </div>
                                 <p class="author_name">
                                     {{ commentItem.username }}

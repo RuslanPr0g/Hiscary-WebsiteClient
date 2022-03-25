@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestsharedService } from 'src/app/testshared.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-info-story',
@@ -10,8 +11,12 @@ import { Router } from '@angular/router';
 })
 export class InfoStoryComponent implements OnInit {
 
+  snackBarDuration: number = 2000;
+  ratingArr = [];
+
   constructor(private service: TestsharedService, 
-    private route: ActivatedRoute, private router: Router) { }
+    private route: ActivatedRoute, private router: Router,
+    private snackBar: MatSnackBar) { }
 
   Story: any = {};
   IsError: boolean = false;
@@ -29,10 +34,17 @@ export class InfoStoryComponent implements OnInit {
       this.router.navigateByUrl('login');
     }
 
+    for (let index = 0; index < this.starCount; index++) {
+      this.ratingArr.push(index as never);
+    }
+
     let id = this.route.snapshot.params['id'];
     this.getStory(id);
     this.getUserInfo();
   }
+
+  rating:number = 3;
+  starCount:number = 5;
 
   getUserInfo(): any {
     this.service.getUserInfo().subscribe(data => {
@@ -88,6 +100,7 @@ export class InfoStoryComponent implements OnInit {
       let isError = this.Story == null || this.Story == undefined ? true : false;
 
       this.refreshComments(id);
+      this.refreshScore();
 
       if (isError) {
         setTimeout(() => {
@@ -99,5 +112,44 @@ export class InfoStoryComponent implements OnInit {
         this.IsLoading = false;
       }, 1000);
     })
+  }
+
+  counter(i: number) {
+    return new Array(i);
+  }
+
+  onClick(rating:number) {
+    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
+      duration: this.snackBarDuration
+    });
+    this.rating = rating;
+    this.scoreStory(this.Story.id, this.rating);
+    return false;
+  }
+
+  scoreStory(id: number, score: number) {
+    this.service.scoryStore({ storyId: id, score }).subscribe(data => {
+      this.refreshScore();
+    })
+  }
+
+  refreshScore() {
+    this.service.storyScores().subscribe(data => {
+      this.rating = data.filter((x: any) => x.userId == this.User.id && 
+        x.storyId == this.Story.id)[0].score;
+      this.refreshComments(this.Story.id);
+    })
+  }
+
+  showIcon(index:number) {
+    if (this.rating >= index + 1) {
+      return 'star';
+    } else {
+      return 'star_border';
+    }
+  }
+
+  showIcon100(index:number) {
+      return 'star';
   }
 }

@@ -60,6 +60,11 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  scoryStore(val: any) {
+    return this.http.post(this.APIUrl + "/story/score", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   removeComment(val: any) {
     return this.http.post(this.APIUrl + "/story/comment/force", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
@@ -72,6 +77,11 @@ export class TestsharedService {
 
   getPagesForStory(val: any) {
     return this.http.get<any>(this.APIUrl + "/story/page/" + val.id,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  storyScores() {
+    return this.http.get<any>(this.APIUrl + "/story/score",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 

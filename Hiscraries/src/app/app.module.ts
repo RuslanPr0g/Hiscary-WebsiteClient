@@ -38,6 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar'; 
 import { MatExpansionModule } from '@angular/material/expansion';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -76,6 +78,7 @@ export function tokenGetter() {
     AngularEditorModule,
     MatIconModule,
     MatSelectModule,
+    MatTooltipModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
     JwtModule.forRoot({
@@ -99,7 +102,9 @@ export function tokenGetter() {
       { path: 'story/search/:query', component: SearchResultsComponent },
     ], { onSameUrlNavigation: 'reload' })
   ],
-  providers: [TestsharedService],
+  providers: [TestsharedService, MatSnackBar],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+ }

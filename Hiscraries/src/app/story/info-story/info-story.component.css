@@ -35,6 +35,11 @@ a {
 .comments {
     background-color: #183259e0;
     min-height: 100vh;
+    padding-top: 2%;
+}
+
+.scoring {
+    margin-left: 20px;
 }
 
 .write-comment,
@@ -97,6 +102,11 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.scoring {
+    display: flex;
+    justify-content: center;
 }
 
 .edit-comment {
