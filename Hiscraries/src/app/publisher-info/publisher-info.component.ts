@@ -37,6 +37,15 @@ export class PublisherInfoComponent implements OnInit {
     })
   }
 
+  bookmark(storyId: number) {
+    this.service.bookmarkStory({ storyId })
+    .subscribe(res => {
+      alert("Bookmark added!");
+    },
+    error => {
+    });
+  }
+
   refreshStoryList() {
     this.service.getStoryList().subscribe(data => {
       this.StoryList = data.filter(item => item.publisher.id == this.User.id).reverse();
