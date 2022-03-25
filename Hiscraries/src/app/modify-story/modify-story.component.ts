@@ -5,6 +5,7 @@ import { TestsharedService } from 'src/app/testshared.service';
 import { Router } from '@angular/router';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import * as _ from "lodash"
 
 @Component({
   selector: 'app-modify-story',
@@ -71,6 +72,8 @@ export class ModifyStoryComponent implements OnInit {
   CurrentPage: number = 0;
 
   CurrentUser: any;
+
+  fileName = '';
 
   ngOnInit(): void {
     if (this.service.isAuthenticated() == false) {
@@ -151,6 +154,7 @@ export class ModifyStoryComponent implements OnInit {
   modifyStoryInfo(): void {
     let storyMod = this.modifystory.getRawValue();
     storyMod["storyId"] = this.StoryId;
+    storyMod["imagePreview"] = this.cardImageBase64;
     this.service.updateStoryInfo(storyMod).subscribe(
       data => {
         this.router.navigateByUrl('story/info/' + this.StoryId);
@@ -160,6 +164,78 @@ export class ModifyStoryComponent implements OnInit {
         this.IsError = true;
         this.errorMessage = error.error;
       });
+  }
+
+  deleteStory() {
+    // this.service.deleteStory(this.StoryId).subscribe(
+    //   data => {
+    //     this.router.navigateByUrl('story/info/' + this.StoryId);
+    //   },
+    //   error => {
+    //     console.log(error)
+    //     this.IsError = true;
+    //     this.errorMessage = error.error;
+    //   });
+  }
+
+  imageError: any;
+  isImageSaved: boolean = false;
+  cardImageBase64: any;
+
+  uploadimage(fileInput: any) {
+    this.imageError = null;
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      // Size Filter Bytes
+      const max_size = 20971520;
+      const allowed_types = ['image/png', 'image/jpeg'];
+      const max_height = 15200;
+      const max_width = 25600;
+
+      if (fileInput.target.files[0].size > max_size) {
+        this.imageError =
+          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+
+        return false;
+      }
+
+      if (!_.includes(allowed_types, fileInput.target.files[0].type)) {
+        this.imageError = 'Only Images are allowed ( JPG | PNG )';
+        return false;
+      }
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          // fix it
+          const img_height = 400;
+          const img_width = 800;
+
+          if (img_height > max_height && img_width > max_width) {
+            this.imageError =
+              'Maximum dimentions allowed ' +
+              max_height +
+              '*' +
+              max_width +
+              'px';
+            return false;
+          } else {
+            const imgBase64Path = e.target.result;
+            this.cardImageBase64 = imgBase64Path;
+
+
+
+            this.isImageSaved = true;
+            return true;
+            // this.previewImagePath = imgBase64Path;
+          }
+        };
+      };
+
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
+
+    return true;
   }
 
   nextPage(): void {

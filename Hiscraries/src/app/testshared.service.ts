@@ -50,6 +50,11 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  bookmarkStory(val: any) {
+    return this.http.post(this.APIUrl + "/story/bookmark", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   updateStoryInfo(val: any) {
     return this.http.patch(this.APIUrl + "/story/", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
@@ -57,6 +62,11 @@ export class TestsharedService {
 
   getPagesForStory(val: any) {
     return this.http.get<any>(this.APIUrl + "/story/page/" + val.id,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  getBookmarks() {
+    return this.http.get<any>(this.APIUrl + "/story/bookmark/",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 

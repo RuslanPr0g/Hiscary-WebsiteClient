@@ -30,6 +30,15 @@ export class SearchResultsComponent implements OnInit {
     this.searchByQuery(search, genre);
   }
 
+  bookmark(storyId: number) {
+    this.service.bookmarkStory({ storyId })
+    .subscribe(res => {
+      alert("Bookmark added!");
+    },
+    error => {
+    });
+  }
+
   searchByQuery(search: string | null, genre: string | null): any {
     this.service.search({ search, genre }).subscribe(data => {
       this.StoryList = data;

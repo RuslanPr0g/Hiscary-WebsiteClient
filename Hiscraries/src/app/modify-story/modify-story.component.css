@@ -29,11 +29,15 @@ h1 {
 }
 
 
+.file-input {
+  display: none;
+}
 
 
 
-
-
+.file-upload {
+  margin: 10% 0;
+}
 
 
 

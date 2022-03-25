@@ -92,6 +92,11 @@
                 </div>
 
 
+                <div class="file-upload">
+                    <input type="file" (change)="uploadimage($event)" class="fileInputProfile">
+                </div>
+
+
                 <button class='btn block-cube block-cube-hover' type='submit'>
                     <div class='bg-top'>
                         <div class='bg-inner'></div>
@@ -119,6 +124,21 @@
                     </div>
                     <div class='text'>
                         Cancel
+                    </div>
+                </button>
+                <br>
+                <button class='btn block-cube block-cube-red block-cube-hover' type='button' (click)="deleteStory()">
+                    <div class='bg-top'>
+                        <div class='bg-inner'></div>
+                    </div>
+                    <div class='bg-right'>
+                        <div class='bg-inner'></div>
+                    </div>
+                    <div class='bg'>
+                        <div class='bg-inner'></div>
+                    </div>
+                    <div class='text'>
+                        Delete
                     </div>
                 </button>
             </form>

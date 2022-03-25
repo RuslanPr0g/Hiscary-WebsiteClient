@@ -1,3 +1,8 @@
+<app-headerbar></app-headerbar>
+
+<section class="home-section">
+    <h1 class="text-center">My bookmarks</h1>
+</section>
 <ul class="story-list">
     <li class="story-list_item" *ngFor="let storyItem of StoryList">
         <a href="/story/info/{{storyItem.id}}" class="story">
@@ -22,11 +27,8 @@
                 </p>
             </div>
         </a>
-        <a href="/modifystory/{{storyItem.id}}" class="edit-story btn btn-info" *ngIf="CurrentUser.id == storyItem.publisher.id">
-            Edit
-        </a>
         <button class="edit-story btn btn-info" (click)="bookmark(storyItem.id)">
-            Bookmark
+            Remove Bookmark
         </button>
     </li>
 </ul>
