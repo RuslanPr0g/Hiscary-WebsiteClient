@@ -28,7 +28,7 @@
         <div class="userdata">Username: {{ User.username }}</div>
         <div class="userdata">Email: {{ User.email }}</div>
         <div class="userdata">Age: {{ User.age }}</div>
-        <div class="userdata">Account Created: {{ User.accountCreated }}</div>
+        <div class="userdata">Account Created: {{ User.accountCreated | date: 'MMM dd, yyyy' }}</div>
         <div class="userdata">Total Reads (People read you): {{ User.totalReads }}</div>
         <div class="userdata">Total Stories: {{ User.totalStories }}</div>
         <div class="userdata">Average Score: {{ User.averageScore | number: '1.0-2' }}</div>

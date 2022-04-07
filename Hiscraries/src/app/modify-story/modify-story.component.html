@@ -76,7 +76,7 @@
                     <div class="genre-block">
                         <span class="genre-title">Genre</span>
                         <mat-form-field appearance="fill">
-                            <mat-select [(ngModel)]="selectedValue" name="genre" [ngModelOptions]="{standalone: true}">
+                            <mat-select [(ngModel)]="selectedValue" multiple name="genre" [ngModelOptions]="{standalone: true}">
                                 <mat-option *ngFor="let genre of genres" [value]="genre.id">
                                     {{genre.name}}
                                 </mat-option>

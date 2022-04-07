@@ -74,7 +74,7 @@ export class ModifyStoryComponent implements OnInit {
 
   CurrentUser: any;
 
-  selectedValue: number = 1;
+  selectedValue: number[] = [];
 
   genres: Genre[] = [];
   GenreList: any = [];
@@ -141,16 +141,17 @@ export class ModifyStoryComponent implements OnInit {
     this.service.getStoryById({ id }).subscribe(data => {
       this.Story = data[0];
 
+      this.selectedValue = this.Story.genres.map((x: any) => {
+        return x.id
+      });
+
       this.modifystory = this.formBuilder.group({
         title: this.Story.title,
         description: this.Story.description,
         authorname: this.Story.authorName,
-        genreid: this.Story.genre.id,
         agelimit: this.Story.ageLimit,
         datewritten: this.Story.dateWritten
       })
-
-      this.selectedValue = this.Story.genre.id;
 
       let isError = this.Story == null || this.Story == undefined ? true : false;
 
@@ -171,10 +172,17 @@ export class ModifyStoryComponent implements OnInit {
   }
 
   modifyStoryInfo(): void {
+    if (this.selectedValue.length === 0)
+    {
+      alert("Select at leat one genre!");
+      return;
+    }
+
     let storyMod = this.modifystory.getRawValue();
     storyMod["storyId"] = this.StoryId;
     storyMod["imagePreview"] = this.cardImageBase64;
-    storyMod["genreid"] = this.selectedValue;
+    storyMod["genreIds"] = this.selectedValue;
+
     this.service.updateStoryInfo(storyMod).subscribe(
       data => {
         this.router.navigateByUrl('story/info/' + this.StoryId);

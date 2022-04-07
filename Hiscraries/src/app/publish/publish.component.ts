@@ -13,7 +13,7 @@ export class PublishComponent implements OnInit {
   errorMessage: string = '';
   publishstory: FormGroup;
 
-  selectedValue: number = 1;
+  selectedValue: number[] = [];
 
   genres: Genre[] = [];
 
@@ -54,8 +54,14 @@ export class PublishComponent implements OnInit {
   }
 
   publishStory(): void {
+    if(this.selectedValue.length === 0)
+    {
+      alert("Choose at least one genre!");
+      return;
+    }
+
     var storys = this.publishstory.getRawValue();
-    storys["genreid"] = this.selectedValue;
+    storys["genreIds"] = this.selectedValue;
     this.service.addStory(storys)
     .subscribe(res => {
       console.log(res)
@@ -63,6 +69,14 @@ export class PublishComponent implements OnInit {
     },
     error => {
       console.error("Publish Error", error)
+      let errorstring = "";
+
+      for (const [key, value] of Object.entries(error.error.errors)) {
+        errorstring += `${key}: ${value}`;
+      }
+
+      alert(errorstring);
+      
       this.errorMessage = error.error;
     });
   }

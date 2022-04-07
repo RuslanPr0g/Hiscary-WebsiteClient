@@ -99,6 +99,10 @@ export class InfoStoryComponent implements OnInit {
       this.Story = data[0];
       let isError = this.Story == null || this.Story == undefined ? true : false;
 
+      this.Story.genres = this.Story.genres.map(function(elem: any){
+          return elem.name;
+      }).join(",");
+
       this.refreshComments(id);
       this.refreshScore();
 
