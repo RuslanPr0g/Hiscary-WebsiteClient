@@ -30,13 +30,12 @@ export class PublishComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-   }
+  }
 
-   GenreList: any = [];
+  GenreList: any = [];
 
   ngOnInit(): void {
-    if (this.service.isAuthenticated() == false)
-    {
+    if (this.service.isAuthenticated() == false) {
       this.router.navigateByUrl('login');
     }
 
@@ -54,35 +53,46 @@ export class PublishComponent implements OnInit {
   }
 
   publishStory(): void {
-    if(this.selectedValue.length === 0)
-    {
-      alert("Choose at least one genre!");
+    if (this.selectedValue.length === 0) {
+      this.errorMessage = "Choose at least one genre!";
+      return;
+    }
+
+    var age = this.publishstory.controls['agelimit'].value;
+
+    if (+age < 0) {
+      this.errorMessage = "Please, enter valid age!";
       return;
     }
 
     var storys = this.publishstory.getRawValue();
     storys["genreIds"] = this.selectedValue;
     this.service.addStory(storys)
-    .subscribe(res => {
-      console.log(res)
-      this.router.navigateByUrl('modifystory/' + res);
-    },
-    error => {
-      console.error("Publish Error", error)
-      let errorstring = "";
+      .subscribe(res => {
+        console.log(res)
+        this.router.navigateByUrl('modifystory/' + res);
+      },
+        error => {
+          console.error("Publish Error", error)
+          let errorstring = "";
 
-      for (const [key, value] of Object.entries(error.error.errors)) {
-        errorstring += `${key}: ${value}`;
-      }
+          for (const [key, value] of Object.entries(error.error.errors)) {
+            errorstring += `${key}: ${value}`;
+          }
 
-      alert(errorstring);
-      
-      this.errorMessage = error.error;
-    });
+          if (errorstring.includes("agelimit")) {
+            this.errorMessage = "Please, enter valid age!";
+            return;
+          }
+          else {
+            alert(errorstring);
+          }
+
+          this.errorMessage = error.error;
+        });
   }
 
-  cancel(): void
-  {
+  cancel(): void {
     this.router.navigateByUrl('');
   }
 }

@@ -178,6 +178,13 @@ export class ModifyStoryComponent implements OnInit {
       return;
     }
 
+    var age = this.modifystory.controls['agelimit'].value;
+
+    if (+age <= 0) {
+      this.errorMessage = "Please, enter valid age!";
+      return;
+    }
+
     let storyMod = this.modifystory.getRawValue();
     storyMod["storyId"] = this.StoryId;
     storyMod["imagePreview"] = this.cardImageBase64;
@@ -188,22 +195,35 @@ export class ModifyStoryComponent implements OnInit {
         this.router.navigateByUrl('story/info/' + this.StoryId);
       },
       error => {
-        console.log(error)
-        this.IsError = true;
+        console.error("Modify Error", error)
+        let errorstring = "";
+
+        for (const [key, value] of Object.entries(error.error.errors)) {
+          errorstring += `${key}: ${value}`;
+        }
+
+        if (errorstring.includes("agelimit")) {
+          this.errorMessage = "Please, enter valid age!";
+          return;
+        }
+        else {
+          alert(errorstring);
+        }
+
         this.errorMessage = error.error;
       });
   }
 
   deleteStory() {
-    // this.service.deleteStory(this.StoryId).subscribe(
-    //   data => {
-    //     this.router.navigateByUrl('story/info/' + this.StoryId);
-    //   },
-    //   error => {
-    //     console.log(error)
-    //     this.IsError = true;
-    //     this.errorMessage = error.error;
-    //   });
+    this.service.deleteStory({ storyId: this.StoryId }).subscribe(
+      data => {
+        this.router.navigateByUrl('');
+      },
+      error => {
+        console.log(error)
+        this.IsError = true;
+        this.errorMessage = error.error;
+      });
   }
 
   imageError: any;

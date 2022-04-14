@@ -40,6 +40,11 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  deleteStory(val: any) {
+    return this.http.post(this.APIUrl + "/story/delete", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   readStoryHistory(val: any) {
     return this.http.post(this.APIUrl + "/story/readstory", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });

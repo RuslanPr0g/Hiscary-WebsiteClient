@@ -14,7 +14,7 @@ export class InfoStoryComponent implements OnInit {
   snackBarDuration: number = 2000;
   ratingArr = [];
 
-  constructor(private service: TestsharedService, 
+  constructor(private service: TestsharedService,
     private route: ActivatedRoute, private router: Router,
     private snackBar: MatSnackBar) { }
 
@@ -22,6 +22,7 @@ export class InfoStoryComponent implements OnInit {
   IsError: boolean = false;
   IsLoading: boolean = true;
 
+  errorMessage = '';
   CommentList: any[] = [''];
 
   CurrentComment: string = '';
@@ -29,8 +30,7 @@ export class InfoStoryComponent implements OnInit {
   User: any = {};
 
   ngOnInit(): void {
-    if (this.service.isAuthenticated() == false)
-    {
+    if (this.service.isAuthenticated() == false) {
       this.router.navigateByUrl('login');
     }
 
@@ -43,8 +43,8 @@ export class InfoStoryComponent implements OnInit {
     this.getUserInfo();
   }
 
-  rating:number = 3;
-  starCount:number = 5;
+  rating: number = 3;
+  starCount: number = 5;
 
   getUserInfo(): any {
     this.service.getUserInfo().subscribe(data => {
@@ -64,6 +64,17 @@ export class InfoStoryComponent implements OnInit {
   }
 
   writeComment() {
+    if (this.CurrentComment === '') {
+      this.errorMessage = 'Please, write something!';
+      setInterval(() => {
+        this.errorMessage = '';
+      }, 6000);
+      return;
+    }
+    else {
+      this.errorMessage = '';
+    }
+
     this.service.writeComment({ storyId: this.Story.id, content: this.CurrentComment }).subscribe(data => {
       let isError = data == null;
 
@@ -79,6 +90,11 @@ export class InfoStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.errorMessage = error.error;
+      setInterval(() => {
+        this.errorMessage = '';
+      }, 6000);
     })
   }
 
@@ -99,8 +115,8 @@ export class InfoStoryComponent implements OnInit {
       this.Story = data[0];
       let isError = this.Story == null || this.Story == undefined ? true : false;
 
-      this.Story.genres = this.Story.genres.map(function(elem: any){
-          return elem.name;
+      this.Story.genres = this.Story.genres.map(function (elem: any) {
+        return elem.name;
       }).join(",");
 
       this.refreshComments(id);
@@ -122,11 +138,7 @@ export class InfoStoryComponent implements OnInit {
     return new Array(i);
   }
 
-  onClick(rating:number) {
-    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
-      duration: this.snackBarDuration
-    });
-    this.rating = rating;
+  onClick(rating: number) {
     this.scoreStory(this.Story.id, this.rating);
     return false;
   }
@@ -134,18 +146,27 @@ export class InfoStoryComponent implements OnInit {
   scoreStory(id: number, score: number) {
     this.service.scoryStore({ storyId: id, score }).subscribe(data => {
       this.refreshScore();
+      this.snackBar.open('You rated ' + score + ' / ' + this.starCount, '', {
+        duration: this.snackBarDuration
+      });
+      this.rating = score;
+    }, error => {
+      this.errorMessage = error.error;
+      setInterval(() => {
+        this.errorMessage = '';
+      }, 6000);
     })
   }
 
   refreshScore() {
     this.service.storyScores().subscribe(data => {
-      this.rating = data.filter((x: any) => x.userId == this.User.id && 
+      this.rating = data.filter((x: any) => x.userId == this.User.id &&
         x.storyId == this.Story.id)[0].score;
       this.refreshComments(this.Story.id);
     })
   }
 
-  showIcon(index:number) {
+  showIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star';
     } else {
@@ -153,7 +174,7 @@ export class InfoStoryComponent implements OnInit {
     }
   }
 
-  showIcon100(index:number) {
-      return 'star';
+  showIcon100(index: number) {
+    return 'star';
   }
 }

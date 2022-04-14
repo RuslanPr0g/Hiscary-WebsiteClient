@@ -16,6 +16,10 @@
     Either there is no such story you're looking for or story has been deleted.
 </div>
 
+<div class="error" *ngIf="errorMessage.length > 0">
+    <p>{{ errorMessage }}</p>
+</div>
+
 <div class="loaded" *ngIf="!IsLoading">
     <img src="data:image/png;base64,{{ Story.imagePreview }}" alt="story preview" class="story_preview">
     <app-headerbar></app-headerbar>

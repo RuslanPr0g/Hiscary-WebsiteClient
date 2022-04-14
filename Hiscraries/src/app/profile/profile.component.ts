@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TestsharedService } from '../testshared.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -45,6 +46,9 @@ export class ProfileComponent implements OnInit {
       this.User = data;
       let isError = this.User == null || this.User == undefined ? true : false;
 
+      this.formuserdata.controls['email'].setValue(data.email);
+      this.formuserdata.controls['dob'].setValue(formatDate(data.birthDate,'yyyy-MM-dd','en'));
+      
       if (isError) {
         setTimeout(() => {
           this.IsError = true;
@@ -78,9 +82,27 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  validateEmail(email: string) {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   updateUserData(): void {
+    var email = this.formuserdata.getRawValue().email;
+
+    if (!this.validateEmail(email)) {
+      this.errorMessage = "It's not an email!";
+      return;
+    }
+    else {
+      this.errorMessage = '';
+    }
+
     this.service.updateUsersData({
-      email: this.formuserdata.getRawValue().email,
+      email: email,
       birthDate: this.formuserdata.getRawValue().dob
     }).subscribe(
       data => {
@@ -90,6 +112,10 @@ export class ProfileComponent implements OnInit {
       error => {
         console.log(error)
         this.errorMessage = error.error;
+
+        setTimeout(()=> {
+          this.errorMessage = '';
+        }, 6000);
       });
   }
 }

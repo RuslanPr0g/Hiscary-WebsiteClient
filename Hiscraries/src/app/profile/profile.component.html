@@ -124,7 +124,8 @@
     </section>
 
     <section class="home-section">
-        <h1 class="text-center">My stories</h1>
+        <h1 class="text-center" *ngIf="StoryList.length > 0">My stories</h1>
+        <h1 class="text-center" *ngIf="StoryList.length === 0">Nothing posted yet, try to come up with a new story!</h1>
     </section>
     <ul class="story-list">
         <li class="story-list_item" *ngFor="let storyItem of StoryList">
