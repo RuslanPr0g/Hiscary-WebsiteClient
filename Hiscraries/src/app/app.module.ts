@@ -40,6 +40,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { PublisherInfoComponent } from './publisher-info/publisher-info.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { MatTableModule } from '@angular/material/table'  
+
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -63,7 +66,8 @@ export function tokenGetter() {
     ModifyStoryComponent,
     HistoryComponent,
     BookmarksComponent,
-    PublisherInfoComponent
+    PublisherInfoComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -80,6 +84,7 @@ export function tokenGetter() {
     MatSelectModule,
     MatTooltipModule,
     MatProgressBarModule,
+    MatTableModule,
     BrowserAnimationsModule,
     JwtModule.forRoot({
       config: {
@@ -92,6 +97,7 @@ export function tokenGetter() {
       { path: 'login', component: LoginComponent },
       { path: 'logout', component: LogoutComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: 'admin', component: AdminPanelComponent },
       { path: 'publish', component: PublishComponent },
       { path: 'history', component: HistoryComponent },
       { path: 'bookmarks', component: BookmarksComponent },

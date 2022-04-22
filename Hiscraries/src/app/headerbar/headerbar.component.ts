@@ -12,6 +12,7 @@ export class HeaderbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   CurrentUser: any;
   isPublisher: any;
+  isAdmin: any;
 
   constructor(private router: Router, private service: TestsharedService, private route: ActivatedRoute) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
@@ -52,7 +53,8 @@ export class HeaderbarComponent implements OnInit {
     this.service.getUserInfo()
     .subscribe(res => {
       this.CurrentUser = res;
-      this.isPublisher = this.CurrentUser.role == "publisher";
+      this.isPublisher = this.CurrentUser.role === "publisher";
+      this.isAdmin = this.CurrentUser.role === "admin";
     },
     error => {
     });

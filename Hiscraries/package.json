@@ -27,11 +27,13 @@
     "@material/button": "^13.0.0",
     "@material/form-field": "^13.0.0",
     "@mdi/angular-material": "^6.5.95",
+    "angular-material-data-table": "^0.10.10",
     "angular-material-expansion-panel": "^0.7.2",
     "angular-material-inputs": "^0.1.0",
     "angular-progress-bar": "^1.0.11",
     "lodash": "^4.17.21",
     "material-expansion-panel": "^1.0.0",
+    "material-table": "^2.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

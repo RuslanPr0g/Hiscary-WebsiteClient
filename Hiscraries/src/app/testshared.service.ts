@@ -25,6 +25,21 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  addGenre(val: any) {
+    return this.http.post<any>(this.APIUrl + "/story/genres", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  editGenre(val: any) {
+    return this.http.patch(this.APIUrl + "/story/genre", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  deleteGenre(val: any) {
+    return this.http.post(this.APIUrl + "/story/genre/delete", val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   getHistory() {
     return this.http.get<any>(this.APIUrl + "/story/history",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
@@ -112,10 +127,19 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  getStories() {
+    return this.http.get<any>(this.APIUrl + "/story/stories",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   //
   // *** USER ***
   //
-  
+
+  getUsers() {
+    return this.http.get<any>(this.APIUrl + "/user/users/",
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
 
   getReviews() {
     return this.http.get<any>(this.APIUrl + "/user/review/",

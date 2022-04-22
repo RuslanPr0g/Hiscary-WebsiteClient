@@ -3,6 +3,41 @@ body {
     background-color: #10101c;
 }
 
+.centered {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 5%;
+}
+
+.buttons button {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.hover:hover {
+    cursor: pointer;
+}
+
+.wmax {
+    width: 100%;
+}
+
+
+
+.modalwin {
+    position: absolute;
+    background: #10101c8a;
+    top: 10%;
+    left: 0;
+
+    /* left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); */
+
+    width: 100%;
+    height: 100%;
+}
 
 /* Loading */
 

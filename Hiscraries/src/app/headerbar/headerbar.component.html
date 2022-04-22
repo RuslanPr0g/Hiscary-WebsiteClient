@@ -16,7 +16,9 @@
         <nav class="menu1">
             <a href="/publish" class="header-link header-publish-link link1" *ngIf="isPublisher">Publish</a>
 
-            <button (click)="becomePub()" class="header-link header-publish-link link1" *ngIf="isLoggedIn && !isPublisher">Become Publisher</button>
+            <a href="/admin" class="header-link header-publish-link link1" *ngIf="isAdmin">Admin</a>
+
+            <button (click)="becomePub()" class="header-link header-publish-link link1" *ngIf="isLoggedIn && !isPublisher && !isAdmin">Become Publisher</button>
 
             <a href="/profile" class="header-link header-profile-link link1" *ngIf="isLoggedIn">Profile</a>
             <a href="/history" class="header-link header-profile-link link1" *ngIf="isLoggedIn">History</a>

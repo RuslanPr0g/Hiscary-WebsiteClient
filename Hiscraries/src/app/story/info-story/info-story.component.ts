@@ -139,7 +139,7 @@ export class InfoStoryComponent implements OnInit {
   }
 
   onClick(rating: number) {
-    this.scoreStory(this.Story.id, this.rating);
+    this.scoreStory(this.Story.id, rating);
     return false;
   }
 
