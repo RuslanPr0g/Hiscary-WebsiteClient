@@ -416,6 +416,11 @@ a {
 .mat-expansion-panel-body {
     background-color: #10101c96!important;
     margin-bottom: 10px;
+    word-break: break-all!important;
+}
+
+.expandedthing {
+    word-break: break-all!important;
 }
 
 .mat-expansion-panel-header:hover {
@@ -424,6 +429,7 @@ a {
 
 .mat-expansion-panel-body {
     background-color: #10101c96!important;
+    word-break: break-all!important;
 }
 
 .mat-panel-description,

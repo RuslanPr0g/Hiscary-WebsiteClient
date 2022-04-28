@@ -13,7 +13,7 @@ export class ReadStoryComponent implements OnInit {
   CurrentPage: number = 0;
   IsError: boolean = false;
   IsLoading: boolean = true;
-  StoryId: number = -1;
+  StoryId: any = -1;
 
   constructor(private service: TestsharedService, private route: ActivatedRoute) { }
 
@@ -23,7 +23,7 @@ export class ReadStoryComponent implements OnInit {
     this.readPage(this.StoryId, 1);
   }
 
-  readPage(storyId: number, pageRead: number) {
+  readPage(storyId: any, pageRead: number) {
     this.service.readStoryHistory({ storyId, pageRead }).subscribe(data => {
       let isError = !data;
 
@@ -36,6 +36,8 @@ export class ReadStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
@@ -66,6 +68,8 @@ export class ReadStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 }

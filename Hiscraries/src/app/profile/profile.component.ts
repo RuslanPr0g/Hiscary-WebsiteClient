@@ -58,6 +58,8 @@ export class ProfileComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
@@ -78,7 +80,7 @@ export class ProfileComponent implements OnInit {
 
   refreshStoryList() {
     this.service.getStoryList().subscribe(data => {
-      this.StoryList = data.filter(item => item.publisher.id == this.User.id).reverse();
+      this.StoryList = data.filter(item => item.publisherId == this.User.id).reverse();
     })
   }
 
@@ -107,7 +109,6 @@ export class ProfileComponent implements OnInit {
     }).subscribe(
       data => {
         this.getUserInfo();
-        console.log(data)
       },
       error => {
         console.log(error)

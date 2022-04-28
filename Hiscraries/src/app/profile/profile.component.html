@@ -21,7 +21,7 @@
 </div>
 
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <app-headerbar></app-headerbar>
 
     <section class="userdatasection" *ngIf="!IsError">
@@ -150,7 +150,7 @@
                     </p>
                 </div>
             </a>
-            <a class="edit-stor" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="User.id == storyItem.publisher.id">
+            <a class="edit-stor" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="User.id == storyItem.publisherId">
                 <mat-icon>open_in_new</mat-icon>
             </a>
         </li>

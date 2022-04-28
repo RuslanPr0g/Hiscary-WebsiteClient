@@ -39,7 +39,7 @@ export class ShowStoryComponent implements OnInit {
     });
   }
 
-  bookmark(storyId: number) {
+  bookmark(storyId: any) {
     this.service.bookmarkStory({ storyId })
     .subscribe(res => {
       alert("Bookmark added!");

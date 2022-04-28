@@ -21,7 +21,7 @@
 </div>
 
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <img src="data:image/png;base64,{{ clickedStoryData.imagePreview }}" *ngIf="clickedStoryData.imagePreview" alt="story preview" class="story_header_background">
     <app-headerbar></app-headerbar>
     <div class="centered">

@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <app-headerbar></app-headerbar>
 
     <div class="error" *ngIf="errorMessage.length > 0">

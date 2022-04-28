@@ -60,10 +60,17 @@ export class InfoStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
   writeComment() {
+    if (this.CurrentComment.length > 850) {
+      alert("Too long message!");
+      return;
+    }
+
     if (this.CurrentComment === '') {
       this.errorMessage = 'Please, write something!';
       setInterval(() => {
@@ -98,19 +105,19 @@ export class InfoStoryComponent implements OnInit {
     })
   }
 
-  refreshComments(id: number) {
+  refreshComments(id: any) {
     this.service.getComments().subscribe(data => {
       this.CommentList = data.filter((s: any) => s.storyId == id);
     })
   }
 
-  removeComment(id: number) {
+  removeComment(id: any) {
     this.service.removeComment({ id }).subscribe(data => {
       this.refreshComments(this.Story.id);
     })
   }
 
-  getStory(id: number): any {
+  getStory(id: any): any {
     this.service.getStoryById({ id }).subscribe(data => {
       this.Story = data[0];
       let isError = this.Story == null || this.Story == undefined ? true : false;
@@ -131,6 +138,8 @@ export class InfoStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
@@ -143,7 +152,7 @@ export class InfoStoryComponent implements OnInit {
     return false;
   }
 
-  scoreStory(id: number, score: number) {
+  scoreStory(id: any, score: number) {
     this.service.scoryStore({ storyId: id, score }).subscribe(data => {
       this.refreshScore();
       this.snackBar.open('You rated ' + score + ' / ' + this.starCount, '', {

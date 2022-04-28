@@ -61,7 +61,7 @@ export class ModifyStoryComponent implements OnInit {
     ]
   };
 
-  StoryId: number = 0;
+  StoryId: any = 0;
   Story: any = {};
   errorMessage: string = "";
   IsError: boolean = false;
@@ -114,7 +114,7 @@ export class ModifyStoryComponent implements OnInit {
         });
   }
 
-  getStoryPages(id: number): void {
+  getStoryPages(id: any): void {
     this.service.getPagesForStory({ id }).subscribe(data => {
       this.pages = data.map((cpage: any) => {
         return cpage.content;
@@ -134,10 +134,12 @@ export class ModifyStoryComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
-  getStory(id: number): any {
+  getStory(id: any): any {
     this.service.getStoryById({ id }).subscribe(data => {
       this.Story = data[0];
 
@@ -162,12 +164,14 @@ export class ModifyStoryComponent implements OnInit {
       }
 
       setTimeout(() => {
-        if (this.CurrentUser.id != this.Story.publisher.id) {
+        if (this.CurrentUser.id != this.Story.publisherId) {
           this.router.navigateByUrl('');
         }
 
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 
@@ -346,7 +350,6 @@ export class ModifyStoryComponent implements OnInit {
 
       },
       error => {
-        console.log(error)
         this.IsError = true;
         this.errorMessage = error.error;
       });

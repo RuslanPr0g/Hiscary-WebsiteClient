@@ -13,14 +13,15 @@
 </div>
 
 <div class="errorpage" *ngIf="IsError && !IsLoading">
-    Either there is no such story you're looking for or story has been deleted.
+    <app-headerbar></app-headerbar>
+    <div class="mt-5">Either there is no such story you're looking for or story has been deleted.</div>
 </div>
 
 <div class="error" *ngIf="errorMessage.length > 0">
     <p>{{ errorMessage }}</p>
 </div>
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <img src="data:image/png;base64,{{ Story.imagePreview }}" alt="story preview" class="story_preview">
     <app-headerbar></app-headerbar>
 
@@ -46,7 +47,7 @@
             <div class="storydata">Has Total Stories: {{ Story.publisher.totalStories }}</div>
             <div class="storydata">Has Total Reads: {{ Story.publisher.totalReads }}</div>
             <div class="storydata">Has Average Score: {{ Story.publisher.averageScore | number: '1.0-2' }}</div>
-            <a href="/publisher/{{Story.publisher.username}}/{{User.id}}">View profile</a>
+            <a href="/publisher/{{Story.publisher.username}}">View profile</a>
             <br>
             <br>
             <br>
@@ -110,7 +111,9 @@
                                         {{ commentItem.content | slice:0:15 }}...
                                     </mat-panel-description>
                                 </mat-expansion-panel-header>
-                                {{ commentItem.content }}
+                                <div class="expandedthing">
+                                    {{ commentItem.content }}
+                                </div>
                             </mat-expansion-panel>
                             <div class="edit-comment" *ngIf="commentItem.userId == User.id">
                                 <button mat-icon-button color="warn" (click)="removeComment(commentItem.id)">

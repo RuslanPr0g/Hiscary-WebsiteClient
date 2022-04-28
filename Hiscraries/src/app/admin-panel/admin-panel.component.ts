@@ -83,7 +83,7 @@ export class AdminPanelComponent implements OnInit {
 
   selectedValueStoryGenre: number[] = [];
 
-  StoryId: number = 0;
+  StoryId: any = 0;
 
 
   clickUsers(row: any): any {
@@ -140,7 +140,7 @@ export class AdminPanelComponent implements OnInit {
 
   getUsers(): any {
     this.service.getUsers().subscribe(data => {
-      this.userData = data;
+      this.userData = data.filter((x: any) => x.userrole !== "admin");
     })
   }
 
@@ -329,6 +329,9 @@ export class AdminPanelComponent implements OnInit {
   addGenre(genre: any): any {
     this.service.addGenre(genre).subscribe(data => {
       this.showGenreModal = false;
+      this.getGenres();
+    }, error => {
+      alert("Please, provide clear title and description!");
     })
   }
 
@@ -339,14 +342,14 @@ export class AdminPanelComponent implements OnInit {
 
     if (this.toAddGenre) {
       this.addGenre(genre);
-    this.getGenres();
-    return;
+      this.getGenres();
+      return;
     }
 
     this.service.editGenre(genre).subscribe(data => {
       this.showGenreModal = false;
+      this.getGenres();
     })
-    this.getGenres();
   }
 
   deleteGenreData(): any {
@@ -380,6 +383,8 @@ export class AdminPanelComponent implements OnInit {
       setTimeout(() => {
         this.IsLoading = false;
       }, 1000);
+    }, error => {
+      this.IsError = true;
     })
   }
 }

@@ -1,7 +1,7 @@
 import { Byte } from '@angular/compiler/src/util';
 
 export default class Story {
-  Id: number;
+  Id: any;
   Publisher: any;
   Title: string;
   Description: string;
@@ -12,7 +12,7 @@ export default class Story {
   DatePublished: Date | undefined;
   DateWritten: Date | undefined;
 
-  constructor(id: number, title: string, desc: string, aname: string,
+  constructor(id: any, title: string, desc: string, aname: string,
     alimit: number, preview: Array<Byte>, datep: Date, datew: Date) {
     this.Id = id;
     this.Title = title;

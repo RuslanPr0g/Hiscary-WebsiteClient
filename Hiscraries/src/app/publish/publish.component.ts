@@ -68,9 +68,8 @@ export class PublishComponent implements OnInit {
     var storys = this.publishstory.getRawValue();
     storys["genreIds"] = this.selectedValue;
     this.service.addStory(storys)
-      .subscribe(res => {
-        console.log(res)
-        this.router.navigateByUrl('modifystory/' + res);
+      .subscribe((res: any) => {
+        this.router.navigateByUrl('modifystory/' + res.id);
       },
         error => {
           console.error("Publish Error", error)

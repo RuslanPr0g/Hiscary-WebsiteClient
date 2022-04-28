@@ -21,7 +21,7 @@
 </div>
 
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <app-headerbar></app-headerbar>
 
     <section class="userdatasection" *ngIf="!IsError">
@@ -101,7 +101,9 @@
                                             {{ reviewItem.message | slice:0:15 }}...
                                         </mat-panel-description>
                                     </mat-expansion-panel-header>
-                                    {{ reviewItem.message }}
+                                    <div class="expandedthing">
+                                        {{ reviewItem.message }}
+                                    </div>
                                 </mat-expansion-panel>
                                 <div class="edit-review" *ngIf="reviewItem.reviewerId == CurrentId">
                                     <button mat-icon-button color="warn" (click)="removeReview(reviewItem.id)">

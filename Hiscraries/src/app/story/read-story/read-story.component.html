@@ -16,7 +16,7 @@
     Either there is no such story you're looking for or story has been deleted.
 </div>
 
-<div class="loaded" *ngIf="!IsLoading">
+<div class="loaded" *ngIf="!IsLoading && !IsError">
     <app-headerbar></app-headerbar>
 
     <div class="readstory" *ngIf="!IsError">

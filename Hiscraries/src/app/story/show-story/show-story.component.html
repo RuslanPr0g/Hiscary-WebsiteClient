@@ -21,7 +21,7 @@
                 </p>
             </div>
         </a>
-        <a class="edit-story" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="CurrentUser.id == storyItem.publisher.id">
+        <a class="edit-story" href="/modifystory/{{storyItem.id}}" mat-icon-button aria-label="Example icon button with a open in new tab icon" *ngIf="CurrentUser.id == storyItem.publisherId">
             <mat-icon>open_in_new</mat-icon>
         </a>
         <button mat-icon-button color="warn" class="edit-story" (click)="bookmark(storyItem.id)">

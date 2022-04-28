@@ -29,7 +29,7 @@ export class BookmarksComponent implements OnInit {
     })
   }
 
-  bookmark(storyId: number) {
+  bookmark(storyId: any) {
     this.service.bookmarkStory({ storyId })
     .subscribe(res => {
       this.refreshStoryList();

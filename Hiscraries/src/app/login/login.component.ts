@@ -56,7 +56,32 @@ export class LoginComponent implements OnInit {
         });
   }
 
+  validateEmail(email: string) {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
   signUp(): void {
+    var email = this.formregister.getRawValue().email;
+    var username = this.formregister.getRawValue().username;
+    var password = this.formregister.getRawValue().password;
+    
+    if (!this.validateEmail(email)) {
+      this.errorMessage = "It's not an email!";
+      return;
+    }
+    else {
+      this.errorMessage = '';
+    }
+
+    if (username.legth < 3 || password.legth < 3)
+    {
+      alert("Username and Password must be at least 3 characters!");
+    }
+
     this.service.register(this.formregister.getRawValue())
       .subscribe(res => {
         this.router.navigateByUrl('');
