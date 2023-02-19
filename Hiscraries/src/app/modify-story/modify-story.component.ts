@@ -193,6 +193,7 @@ export class ModifyStoryComponent implements OnInit {
     storyMod["storyId"] = this.StoryId;
     storyMod["imagePreview"] = this.cardImageBase64;
     storyMod["genreIds"] = this.selectedValue;
+    storyMod["storyAudio"] = this.audioFileBase64;
 
     this.service.updateStoryInfo(storyMod).subscribe(
       data => {
@@ -231,21 +232,69 @@ export class ModifyStoryComponent implements OnInit {
   }
 
   imageError: any;
+  audioError: any;
   isImageSaved: boolean = false;
   cardImageBase64: any;
+  audioFileBase64: any;
+  sureToDelete: boolean = false;
+
+  amISureToDelete(event: any) {
+    this.sureToDelete = true;
+  }
+
+  deleteAudio(event: any) {
+    this.sureToDelete = false;
+    this.service.deleteAudio(this.StoryId).subscribe(
+      data => {
+        alert("Audio removed!");
+      },
+      error => {
+        this.IsError = true;
+        alert("There was error to remove this audio...");
+        this.errorMessage = error.error;
+      });
+  }
+
+  uploadAudio(event: any) {
+    const file: File = event.target.files[0];
+    const max_size = 20000000;
+  
+    if (file.size > max_size) {
+      this.audioError = 'Maximum size allowed is ' + max_size / 1000000 + 'Mb';
+      return;
+    }
+  
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(file);
+  
+    reader.onload = (e: any) => {
+      const arrayBuffer = e.target.result;
+      const blob = new Blob([arrayBuffer], { type: file.type });
+      const fileReader = new FileReader();
+  
+      fileReader.onload = (event: any) => {
+        const base64String = event.target.result;
+        this.audioFileBase64 = base64String;
+        this.audioError = null;
+      };
+  
+      fileReader.readAsDataURL(blob);
+    };
+  }
+  
 
   uploadimage(fileInput: any) {
     this.imageError = null;
     if (fileInput.target.files && fileInput.target.files[0]) {
       // Size Filter Bytes
-      const max_size = 20971520;
+      const max_size = 2000000;
       const allowed_types = ['image/png', 'image/jpeg'];
       const max_height = 15200;
       const max_width = 25600;
 
       if (fileInput.target.files[0].size > max_size) {
         this.imageError =
-          'Maximum size allowed is ' + max_size / 1000 + 'Mb';
+          'Maximum size allowed is ' + max_size / 1000000 + 'Mb';
 
         return false;
       }

@@ -1,41 +1,60 @@
 .errorpage {
-    padding: 5%;
-    color: red;
-    font-size: 2em;
+  padding: 5%;
+  color: red;
+  font-size: 2em;
 }
 
 .readstory {
-    padding: 2%;
+  padding: 2%;
 }
 
 .book {
-    font-size: 1.2em;
-    max-width: 90%;
-    margin: 0 auto;
+  font-size: 1.2em;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 .book_content {
-    text-align: justify;
-    min-height: 60vh;
-    width: 60%;
-    margin: 0 auto;
+  text-align: justify;
+  min-height: 60vh;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.play-audio {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.play-audio button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 50px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+mat-icon {
+  margin-right: 10px;
 }
 
 .book_navigation {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 5%;
-    padding: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5%;
+  padding: 1%;
 }
 
 .book_pagecount {
-
 }
 
 .book_buttons > button {
-    margin: 0 5%;
+  margin: 0 5%;
 }
 
 .book_buttons {
-    width: 20%;
+  width: 20%;
 }

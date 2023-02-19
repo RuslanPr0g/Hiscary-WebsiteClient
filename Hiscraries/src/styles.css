@@ -1,6 +1,6 @@
 body {
     color: #fff;
-    background-color: #10101c;
+    background-color: #3d072b;
 }
 
 .centered {
@@ -27,7 +27,7 @@ body {
 
 .modalwin {
     position: absolute;
-    background: #10101c8a;
+    background: #41093c8a;
     top: 10%;
     left: 0;
 

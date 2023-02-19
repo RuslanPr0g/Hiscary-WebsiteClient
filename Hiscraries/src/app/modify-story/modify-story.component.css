@@ -19,6 +19,10 @@ h1 {
     padding-bottom: 25px;
 }
 
+.color-error {
+    color: red;
+}
+
 .controls>button {}
 
 .controls {

@@ -2,6 +2,7 @@ import { compileInjectable } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TestsharedService } from 'src/app/testshared.service';
+import { Howl } from 'howler';
 
 @Component({
   selector: 'app-read-story',
@@ -15,12 +16,71 @@ export class ReadStoryComponent implements OnInit {
   IsLoading: boolean = true;
   StoryId: any = -1;
 
+  AudioArray: any = [];
+  IsAudioExist: boolean = false;
+  IsAudioPlaying: boolean = false;
+  sound: Howl | null = null;
+
   constructor(private service: TestsharedService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.StoryId = this.route.snapshot.params['id'];
     this.getPages(this.StoryId);
     this.readPage(this.StoryId, 1);
+    this.getAudio(this.StoryId);
+    this.sound = new Howl({
+      src: [""],
+      format: "mp3"
+    });
+  }
+
+  playStopAudio() {
+    if (this.IsAudioPlaying) {
+      this.sound?.pause();
+      this.IsAudioPlaying = false;
+    } else {
+      this.sound?.play();
+      this.IsAudioPlaying = true;
+    }
+  }
+
+  fullStopAudio()
+  {
+    this.sound?.stop();
+    this.IsAudioPlaying = false;
+  }
+
+  getAudio(storyId: any) {
+    this.service.getAudio(storyId).subscribe(data => {
+      let isError = !data;
+
+      if (isError) {
+        setTimeout(() => {
+          this.IsAudioExist = false;
+        }, 1000);
+        return;
+      }
+
+      this.IsAudioExist = true;
+      this.AudioArray = data[0].bytes;
+      const blob = new Blob([this.AudioArray], { type: 'audio/mp3' });
+      const url = URL.createObjectURL(blob);
+
+      this.sound?.unload();
+      this.sound = new Howl({
+        src: ['data:audio/mpeg;base64,' + this.AudioArray],
+        format: "mp3",
+        onend: () => {
+          this.IsAudioPlaying = false;
+        },
+        onloaderror: (id, error) => {
+          console.log('Error loading audio:', error);
+          this.IsAudioExist = false;
+        }
+      });
+    }, error => {
+      this.IsAudioExist = false;
+    })
   }
 
   readPage(storyId: any, pageRead: number) {

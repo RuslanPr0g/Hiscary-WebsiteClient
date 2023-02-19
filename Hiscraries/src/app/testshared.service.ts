@@ -65,6 +65,16 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
+  getAudio(val: any) {
+    return this.http.get<any>(this.APIUrl + "/story/audio/" + val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
+  deleteAudio(val: any) {
+    return this.http.delete(this.APIUrl + "/story/audio/" + val,
+    { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
+  }
+
   addStoryPage(val: any) {
     return this.http.post(this.APIUrl + "/story/page", val,
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });

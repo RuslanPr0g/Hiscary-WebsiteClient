@@ -21,7 +21,7 @@
 .header-login-link {}
 
 .header-link {
-    background-color: rgba(0, 0, 10, 0.2);
+    background-color: rgba(100, 10, 96, 0.2);
     color: white;
     font-size: 1.5em;
 }
@@ -117,7 +117,7 @@ a {
     height: 200px;
     width: 200px;
     transition: 500ms;
-    background-color: #02173F;
+    background-color: #41062f;
     z-index: 100;
 }
 
