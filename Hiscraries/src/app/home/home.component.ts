@@ -5,11 +5,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
+  constructor(private service: TestsharedService, private router: Router) {
+    this.cookieMessageDismissed = JSON.parse(
+      localStorage.getItem('cookieMessageDismissed') || 'false'
+    );
+  }
 
-  constructor(private service: TestsharedService, private router: Router) { }
+  cookieMessageDismissed: boolean;
 
   GenreList: any = [];
 
@@ -17,9 +22,19 @@ export class HomeComponent implements OnInit {
     this.setGenres();
   }
 
+  openCookies() {
+    window.open('/cookies', '_blank');
+    this.dismissCookieMessage();
+  }
+
+  dismissCookieMessage() {
+    this.cookieMessageDismissed = true;
+    localStorage.setItem('cookieMessageDismissed', JSON.stringify(true));
+  }
+
   setGenres(): void {
-    this.service.getGenres().subscribe(data => {
+    this.service.getGenres().subscribe((data) => {
       this.GenreList = data.reverse();
-    })
+    });
   }
 }

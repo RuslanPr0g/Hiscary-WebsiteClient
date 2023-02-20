@@ -41,8 +41,8 @@ import { PublisherInfoComponent } from './publisher-info/publisher-info.componen
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { MatTableModule } from '@angular/material/table'  
-
+import { MatTableModule } from '@angular/material/table';
+import { CookiesComponentComponent } from './cookies-component/cookies-component.component'  
 
 export function tokenGetter() {
   return localStorage.getItem(environment.ACCESS_TOKEN_KEY);
@@ -67,7 +67,8 @@ export function tokenGetter() {
     HistoryComponent,
     BookmarksComponent,
     PublisherInfoComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    CookiesComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +107,7 @@ export function tokenGetter() {
       { path: 'story/info/:id', component: InfoStoryComponent },
       { path: 'story/read/:id', component: ReadStoryComponent },
       { path: 'story/search/:query', component: SearchResultsComponent },
+      { path: 'cookies', component: CookiesComponentComponent },
     ], { onSameUrlNavigation: 'reload' })
   ],
   providers: [TestsharedService, MatSnackBar],

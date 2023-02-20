@@ -128,8 +128,8 @@
                     <h4 *ngIf="audioError !== null" class="color-error">{{audioError}}</h4>
                     <input type="file" accept="audio/*" (change)="uploadAudio($event)">
 
-                    <button *ngIf="!sureToDelete" (click)="amISureToDelete($event)">Delete audio</button>
-                    <button *ngIf="sureToDelete" (click)="deleteAudio($event)">I confirm to delete audio from this story</button>
+                    <button *ngIf="!sureToDelete" mat-flat-button color="primary" (click)="amISureToDelete($event)">Delete audio</button>
+                    <button *ngIf="sureToDelete" mat-flat-button color="primary" (click)="deleteAudio($event)">I confirm to delete audio from this story</button>
                 </div>
 
                 <button class='btn block-cube block-cube-hover' type='submit'>

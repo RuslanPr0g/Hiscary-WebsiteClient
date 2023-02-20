@@ -228,6 +228,7 @@ export class ModifyStoryComponent implements OnInit {
         console.log(error)
         this.IsError = true;
         this.errorMessage = error.error;
+        this.router.navigateByUrl('');
       });
   }
 
@@ -250,8 +251,8 @@ export class ModifyStoryComponent implements OnInit {
       },
       error => {
         this.IsError = true;
-        alert("There was error to remove this audio...");
-        this.errorMessage = error.error;
+        alert("There is no audio :)");
+        location.reload();
       });
   }
 

@@ -27,6 +27,13 @@
     flex-direction: row;
 }
 
+.report {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .play-audio button {
   display: flex;
   align-items: center;

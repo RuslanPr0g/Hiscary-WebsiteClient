@@ -39,6 +39,14 @@
         </div>
       </div>
     </div>
+    <div class="report" *ngIf="!isReported">
+      <button mat-flat-button color="primary" (click)="startReport($event)" *ngIf="!isReportStarted">
+        Report this story content
+      </button>
+      <button mat-flat-button color="warn" (click)="reportStoryContent($event)" *ngIf="isReportStarted">
+        I am sure to report this story content
+      </button>
+    </div>
     <div class="play-audio" *ngIf="IsAudioExist">
       <button mat-flat-button color="primary" (click)="playStopAudio()">
         <mat-icon>{{ IsAudioPlaying ? "stop" : "play_arrow" }}</mat-icon>
