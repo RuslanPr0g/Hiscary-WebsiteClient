@@ -26,6 +26,8 @@ export class ReadStoryComponent implements OnInit {
 
   User: any = {};
 
+  isOwner: boolean = true;
+
   constructor(
     private service: TestsharedService,
     private route: ActivatedRoute
@@ -58,6 +60,7 @@ export class ReadStoryComponent implements OnInit {
 
         setTimeout(() => {
           this.updateReportStatus();
+          this.getStoryInfo();
           this.IsLoading = false;
         }, 1000);
       },
@@ -65,6 +68,25 @@ export class ReadStoryComponent implements OnInit {
         this.IsError = true;
       }
     );
+  }
+
+  getStoryInfo() {
+    this.service
+      .getStoryById({
+        id: this.StoryId,
+      })
+      .subscribe(
+        (data) => {
+          if (data[0].publisherId == this.User.id) {
+            this.isOwner = true;
+          } else {
+            this.isOwner = false;
+          }
+        },
+        (error) => {
+          this.isOwner = false;
+        }
+      );
   }
 
   startReport(event: any) {

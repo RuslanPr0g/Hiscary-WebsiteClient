@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-    <div class="report" *ngIf="!isReported">
+    <div class="report" *ngIf="!isReported && !isOwner">
       <button mat-flat-button color="primary" (click)="startReport($event)" *ngIf="!isReportStarted">
         Report this story content
       </button>

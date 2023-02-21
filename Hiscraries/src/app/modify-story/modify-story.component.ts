@@ -385,7 +385,7 @@ export class ModifyStoryComponent implements OnInit {
     }
   }
 
-  publishPages(): void {
+  publishPages(event: any): void {
     if (this.htmlContent != "") {
       this.pages[this.CurrentPage] = this.htmlContent;
     }
@@ -397,11 +397,12 @@ export class ModifyStoryComponent implements OnInit {
 
     this.service.updateStoryPages(storyPages).subscribe(
       data => {
-
+        this.router.navigateByUrl('story/info/' + this.StoryId);
       },
       error => {
         this.IsError = true;
         this.errorMessage = error.error;
+        this.router.navigateByUrl('story/info/' + this.StoryId);
       });
   }
 

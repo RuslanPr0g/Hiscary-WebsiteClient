@@ -90,7 +90,7 @@ export class TestsharedService {
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
 
-  getStoryReports(val: any) {
+  getStoryReports() {
     return this.http.get<any>(this.APIUrl + "/story/report",
     { headers: { "Authorization": "Bearer " + localStorage.getItem(environment.ACCESS_TOKEN_KEY) } });
   }
