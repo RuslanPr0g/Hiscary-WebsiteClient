@@ -183,6 +183,10 @@
                 Modify pages for the story
             </h1>
 
+            <h2 *ngIf="profanityError" class="color-error">
+                Your page contains profanity
+            </h2>
+
             <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
             <div class="current-page">
                 Current page: {{CurrentPage + 1}}/{{pages.length}}

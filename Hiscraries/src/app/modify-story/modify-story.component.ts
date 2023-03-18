@@ -67,6 +67,8 @@ export class ModifyStoryComponent implements OnInit {
   IsError: boolean = false;
   IsLoading: boolean = true;
 
+  profanityError: boolean = false;
+
   modifystory: FormGroup;
   htmlContent: string = "";
   pages: Array<string> = [""];
@@ -386,6 +388,8 @@ export class ModifyStoryComponent implements OnInit {
   }
 
   publishPages(event: any): void {
+    this.profanityError = false;
+
     if (this.htmlContent != "") {
       this.pages[this.CurrentPage] = this.htmlContent;
     }
@@ -400,9 +404,12 @@ export class ModifyStoryComponent implements OnInit {
         this.router.navigateByUrl('story/info/' + this.StoryId);
       },
       error => {
-        this.IsError = true;
-        this.errorMessage = error.error;
-        this.router.navigateByUrl('story/info/' + this.StoryId);
+        if (error.error.page !== null && error.error.page !== undefined && error.error.page >= 0)
+        {
+          this.CurrentPage = error.error.page;
+          this.htmlContent = this.pages[this.CurrentPage];
+          this.profanityError = true;
+        }
       });
   }
 
